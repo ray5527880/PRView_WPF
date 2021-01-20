@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="download1.png" />
+    <None Remove="Ex.png" />
+    <None Remove="openfile.png" />
+    <None Remove="remove.png" />
+    <None Remove="Screenshot.png" />
+    <None Remove="setup_SP.png" />
+    <None Remove="VS.png" />
+    <None Remove="XZoonIn.png" />
+    <None Remove="XZoonOut.png" />
+    <None Remove="YZoonIn.png" />
+    <None Remove="YZoonOut.png" />
+    <None Remove="Zoon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chart.js" Version="2.9.3" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PRViewViewMode\PRViewViewMode.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="download1.png" />
+    <Resource Include="Ex.png" />
+    <Resource Include="openfile.png" />
+    <Resource Include="remove.png" />
+    <Resource Include="Screenshot.png" />
+    <Resource Include="setup_SP.png" />
+    <Resource Include="VS.png" />
+    <Resource Include="XZoonIn.png" />
+    <Resource Include="XZoonOut.png" />
+    <Resource Include="YZoonIn.png" />
+    <Resource Include="YZoonOut.png" />
+    <Resource Include="Zoon.png" />
+  </ItemGroup>
+
+</Project>
