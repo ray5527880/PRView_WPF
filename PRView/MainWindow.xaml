@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:PRView"
-        xmlns:ViewMode="clr-namespace:PRViewViewMode;assembly=PRViewViewMode"
+        xmlns:ViewMode="clr-namespace:PRView.ViewMode"       
         mc:Ignorable="d"
         Loaded="Window_Loaded"  
         Title="MainWindow" Height="900" Width="1600" WindowStartupLocation="CenterScreen" FontSize="20"  >
@@ -153,9 +154,10 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Button Grid.Row="0" Width="50" Height="50" Click="Button_Click_1"  >
+                          
                             123
                         </Button>
-                        <Button Grid.Row="0" Width="50" Height="50" Click="Button_Click_2" Margin="283,108,467,107"  >
+                        <Button  Grid.Row="0" Width="50" Height="50" Click="Button_Click_2" Margin="283,108,467,107" Command="{Binding buttondown}"  >
                             123
                         </Button>
                     </Grid>

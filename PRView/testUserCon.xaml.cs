@@ -48,20 +48,9 @@ namespace PRView
 
             var p = new Pen();
             p.Brush = b;
-            
 
-            //PolyLineSegment polyline = new PolyLineSegment();
-            //polyline.Points.Add(new Point(500, 100));
-            //polyline.Points.Add(new Point(2000, 100));
-            //polyline.Points.Add(new Point(3000, 200));
-            //polyline.Stroke = b;
-
-           
             LineGeometry lineGeometry = new LineGeometry();
             DrawingGroup drawingGroup = new DrawingGroup();
-            
-
-            
 
             PathSegmentCollection pathSegments = new PathSegmentCollection();
 
@@ -82,15 +71,7 @@ namespace PRView
             geometryDrawing.Geometry = pthGeometry;
 
             DrawingImage drawingImage = new DrawingImage(geometryDrawing);
-            //drawingImage.
-
-            //pathGeometry.AddGeometry(new LineGeometry (new Point))
-            //pathGeometry.
-
-
-
-
-
+          
             GeometryGroup ellipses = new GeometryGroup();
             ellipses.Children.Add(new EllipseGeometry(new Point(50, 50), 45, 20));
             ellipses.Children.Add(new EllipseGeometry(new Point(50, 50), 20, 45));
@@ -140,10 +121,17 @@ namespace PRView
             //ad.Background=b
             //ad = exampleBorder;
 
-            this.image.Source = anImage.Source;
-            this.testimage.Source = drawingImage;
+            //this.image.Source = anImage.Source;
+            //this.testimage.Source = drawingImage;
 
             //asd = anImage;
+
+            var _path = new Path();
+            //_path.Data
+            
+
+
+            //this.canvas.Children)
 
         }
         public void testReMoveLine(int index)
