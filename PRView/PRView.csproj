@@ -23,10 +23,12 @@
 
   <ItemGroup>
     <PackageReference Include="Chart.js" Version="2.9.3" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.3.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\PRSpline\FW_Setup\FW_Setup.csproj" />
     <ProjectReference Include="..\PRViewViewMode\PRViewViewMode.csproj" />
   </ItemGroup>
 

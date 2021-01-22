@@ -13,6 +13,7 @@
     </UserControl.DataContext>-->
     <Grid  Loaded="Grid_Loaded" >
         <Canvas>
+            <Path></Path>
             <Canvas.DataContext>
                 <ViewMode:testUserConViewMode/>
             </Canvas.DataContext>

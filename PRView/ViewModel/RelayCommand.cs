@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 
-namespace PRView.ViewMode
+namespace PRView.ViewModel
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand<TParam> : ICommand where TParam:class
     {
         private readonly Action _action;
-        private readonly Func<bool> _func;
+        private readonly Func<TParam, bool> _func;
         public RelayCommand(Action action)
         {
             _action = action;
         }
-        public RelayCommand(Action execute, Func<bool> canExecute)
+        public RelayCommand(Action execute, Func<TParam, bool> canExecute)
         {
             _func = canExecute;
             _action = execute;
         }
 
-        public bool CanExecute(object parameter) => _func == null || _func();
+        public bool CanExecute(object parameter) => _func == null || _func(parameter as TParam);
 
         public void Execute(object parameter) => _action();
 

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:PRView"
-        xmlns:ViewMode="clr-namespace:PRView.ViewMode"       
+        xmlns:ViewModel="clr-namespace:PRView.ViewModel"       
         mc:Ignorable="d"
-        Loaded="Window_Loaded"  
+        
         Title="MainWindow" Height="900" Width="1600" WindowStartupLocation="CenterScreen" FontSize="20"  >
     <Window.DataContext>
-        <ViewMode:MainWindowViewMode/>
+        <ViewModel:MainWindowViewModel/>
     </Window.DataContext>
     <Grid Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -48,7 +48,7 @@
                                     <RowDefinition Height="50"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <Button Width="44"  Height="44" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Background="Transparent" Click="Button_Click">
+                                <Button Width="44"  Height="44" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Background="Transparent" Command="{Binding btn_OpenFile, Mode=OneWay}">
                                     <Image Source="openfile.png"/>
                                 </Button>
                                 <Button Width="44" Height="44" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1" Background="Transparent">
@@ -82,28 +82,28 @@
                                     <ColumnDefinition Width="150"/>
                                     <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Row="1" Grid.Column="1" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" >
+                                <Button  Grid.Row="1" Grid.Column="1" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Visibility="Visible" Command="{Binding btn_XZoomIn, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}"  >
                                     <Image Source="XZoonIn.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="2" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                                <Button Grid.Row="1" Grid.Column="2" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_XZoomOut, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}" >
                                     <Image Source="XZoonOut.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="3" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                                <Button Grid.Row="1" Grid.Column="3" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_ReZoom, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="Zoon.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="4" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                                <Button Grid.Row="1" Grid.Column="4" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_YZoomIn, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="YZoonIn.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="5" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                                <Button Grid.Row="1" Grid.Column="5" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_YZoomOut, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="YZoonOut.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="6" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                                <Button Grid.Row="1" Grid.Column="6" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_Screenshot,Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="Screenshot.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="7" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                                <Button Grid.Row="1" Grid.Column="7" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_ReomveBlack,Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="remove.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="8" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                                <Button Grid.Row="1" Grid.Column="8" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_Extremum,Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="Ex.png"/>
                                 </Button>
                                 <Label Grid.Row="1" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" >
@@ -143,37 +143,62 @@
         <Border Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="9.2*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0">
-                    <Grid>
+                    <Grid >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="5*"/>
+                            <RowDefinition Height="4*"/>
                         </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Width="50" Height="50" Click="Button_Click_1"  >
-                          
-                            123
-                        </Button>
-                        <Button  Grid.Row="0" Width="50" Height="50" Click="Button_Click_2" Margin="283,108,467,107" Command="{Binding buttondown}"  >
-                            123
-                        </Button>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" Grid.Column="1">
+                            <ComboBox/>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="1">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="9*"/>
+                                </Grid.RowDefinitions>
+                                <Label VerticalAlignment="Center" Grid.Row="0" Content="Analog Channels" FontSize="14" Foreground="#FFF9F9F9"/>
+                                <Border Grid.Row="1" BorderBrush="#FF3EE1F1" BorderThickness="2" >
+                                    <ScrollViewer/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="2" Grid.Column="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="9*"/>
+                                </Grid.RowDefinitions>
+                                <Label VerticalAlignment="Center" Grid.Row="0" Content="Digital Channels" FontSize="14" Foreground="#FFF9F9F9"/>
+                                <Border Grid.Row="1" BorderBrush="#FF3EE1F1" BorderThickness="2" >
+                                    <ScrollViewer/>
+                                </Border>
+                            </Grid>
+                            
+                        </Border>
                     </Grid>
-                  
                     
                 </Border>
                 <Border  Grid.Column="1">
                     <Grid x:Name="testGrid">
-                        
+
                     </Grid>
                 </Border>
             </Grid>
-            
-           
+
+
         </Border>
-    
+
 
     </Grid>
 </Window>
