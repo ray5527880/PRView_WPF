@@ -10,19 +10,23 @@ namespace PRView.Model
 {
     public class MainWindowModel
     {
+        public List<double[]> PrimaryData;
+        public List<double[]> SecondaryData;
+        public List<double[]> PerUnitData;
+
         public enum OpenFileErorCode
         {
-            Null=0,
-            NotDatFile=1
+            Null = 0,
+            NotDatFile = 1
         }
         public MainWindowModel()
         {
 
         }
-        public OpenFileErorCode OpenFile(string FilePaht,string FileName)
+        public OpenFileErorCode OpenFile(string FilePaht, string FileName)
         {
             //setEnable(false);
-
+            
             string strFile = FilePaht;
             string strRarPath = string.Empty;
             string strFileName = FileName;
@@ -37,8 +41,8 @@ namespace PRView.Model
                     File.Copy(strFile.Replace(".cfg", ".dat"), strfilePath + strFileName.Replace(".cfg", ".dat"), true);
                     File.Copy(strFile.Replace(".CFG", ".DAT"), strfilePath + strFileName.Replace(".CFG", ".DAT"), true);
                 }
-                else                
-                    return OpenFileErorCode.NotDatFile;                
+                else
+                    return OpenFileErorCode.NotDatFile;
             }
             else
             {
@@ -50,46 +54,46 @@ namespace PRView.Model
                 var mCompressWinRAR = new CompressWinRAR();
                 mCompressWinRAR.UnCompressRar(strfilePath, strRarPath, strFile);
             }
-            Parser parser = new Parser();
+            var Parsers = new Parser();
             //try
             //{
-            //    foreach (var item in Directory.GetFiles(strfilePath, "*.cfg"))
-            //    {
-            //        LoadDataFile.GetCFGData(item, ref mParser);
-            //        break;
-            //    }
-            //    foreach (var item in Directory.GetFiles(strfilePath, "*.CFG"))
-            //    {
-            //        LoadDataFile.GetCFGData(item, ref mParser);
-            //        break;
-            //    }
-            //    PData = new List<double[]>();
-            //    SData = new List<double[]>();
-            //    PUData = new List<double[]>();
-            //    LoadDataFile.GetDatData(mParser, ref PData, ref SData, ref PUData);
+                foreach (var item in Directory.GetFiles(strfilePath, "*.cfg"))
+                {
+                    LoadDataFile.GetCFGData(item, ref Parsers);
+                    break;
+                }
+                foreach (var item in Directory.GetFiles(strfilePath, "*.CFG"))
+                {
+                    LoadDataFile.GetCFGData(item, ref Parsers);
+                    break;
+                }
+                PrimaryData = new List<double[]>();
+                SecondaryData = new List<double[]>();
+                PerUnitData = new List<double[]>();
+                LoadDataFile.GetDatData(Parsers, ref PrimaryData, ref SecondaryData, ref PerUnitData);
 
-            //    Set_Information();
+                //Set_Information();
 
-            //    List<int> _fftIndex = new List<int>();
-            //    for (int i = 0; i < mParser.Schema.TotalAnalogChannels; i++)
-            //    {
-            //        if (mParser.Schema.AnalogChannels[i].Units == "V" || mParser.Schema.AnalogChannels[i].Units == "A")
-            //            _fftIndex.Add(i);
-            //    }
+                List<int> _fftIndex = new List<int>();
+                for (int i = 0; i < Parsers.Schema.TotalAnalogChannels; i++)
+                {
+                    if (Parsers.Schema.AnalogChannels[i].Units == "V" || Parsers.Schema.AnalogChannels[i].Units == "A")
+                        _fftIndex.Add(i);
+                }
             //    FFTIndex = _fftIndex.ToArray();
 
-            //    ClearButton();
-            //    for (int i = 0; i < mParser.Schema.TotalAnalogChannels; i++)
+            //    //ClearButton();
+            //    for (int i = 0; i < Parsers.Schema.TotalAnalogChannels; i++)
             //    {
-            //        AddNewButton(mParser.Schema.AnalogChannels[i].Name, i, 0);
+            //        AddNewButton(Parsers.Schema.AnalogChannels[i].Name, i, 0);
             //    }
-            //    for (int i = 0; i < mParser.Schema.TotalDigitalChannels; i++)
+            //    for (int i = 0; i < Parsers.Schema.TotalDigitalChannels; i++)
             //    {
-            //        AddNewButton(mParser.Schema.DigitalChannels[i].Name, i, 1);
+            //        AddNewButton(Parsers.Schema.DigitalChannels[i].Name, i, 1);
             //    }
             //    for (int i = 0; i < FFTIndex.Length; i++)
             //    {
-            //        AddNewButton(mParser.Schema.AnalogChannels[FFTIndex[i]].Name + "_FFT", i + mParser.Schema.TotalAnalogChannels, 0);
+            //        AddNewButton(Parsers.Schema.AnalogChannels[FFTIndex[i]].Name + "_FFT", i + Parsers.Schema.TotalAnalogChannels, 0);
             //    }
             //    cbxPS.Items.Add("P");
             //    cbxPS.Items.Add("S");

@@ -8,7 +8,7 @@
         xmlns:ViewModel="clr-namespace:PRView.ViewModel"       
         mc:Ignorable="d"
         
-        Title="MainWindow" Height="900" Width="1600" WindowStartupLocation="CenterScreen" FontSize="20"  >
+        Title="MainWindow" Height="900" Width="1600" WindowStartupLocation="CenterScreen" FontSize="20" MinWidth="1600" MinHeight="900"  >
     <Window.DataContext>
         <ViewModel:MainWindowViewModel/>
     </Window.DataContext>
@@ -130,12 +130,12 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Label x:Name="Label_Location" Content="{Binding Locastion}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                        <Label x:Name="Label_Device" Content="{Binding Device}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                        <Label x:Name="Label_StartData" Content="{Binding StartData}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
-                        <Label x:Name="Label_TriggerData" Content="{Binding TriggerData}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                        <Label x:Name="Label_StartTime" Content="{Binding StartTime}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                        <Label x:Name="Label_TriggerTime" Content="{Binding TriggerTime}" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                        <Label Content="{Binding Locastion}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                        <Label Content="{Binding Device}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                        <Label Content="{Binding StartData}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
+                        <Label Content="{Binding TriggerData}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+                        <Label Content="{Binding StartTime}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                        <Label Content="{Binding TriggerTime}" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -168,8 +168,12 @@
                                     <RowDefinition Height="9*"/>
                                 </Grid.RowDefinitions>
                                 <Label VerticalAlignment="Center" Grid.Row="0" Content="Analog Channels" FontSize="14" Foreground="#FFF9F9F9"/>
-                                <Border Grid.Row="1" BorderBrush="#FF3EE1F1" BorderThickness="2" >
-                                    <ScrollViewer/>
+                                <Border  Grid.Row="1" BorderBrush="#FF3EE1F1" BorderThickness="2" >
+                                    <Grid ScrollViewer.VerticalScrollBarVisibility="Auto"  x:Name="AnalogBlack">
+                                        <local:ButtonBlock HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                                    </Grid>
+                                    
                                 </Border>
                             </Grid>
                         </Border>

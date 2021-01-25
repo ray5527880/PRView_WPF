@@ -24,6 +24,10 @@ namespace PRView.ViewModel
         {
             System.Windows.MessageBox.Show("123");
             Locastion = "123";
+            ButtonBlock = new string[] { "123", "456", "789" };
+            //ButtonBlock = 1;
+            //this.AnalogBlack.c
+
         }
         private void OpenFile()
         {
@@ -34,7 +38,8 @@ namespace PRView.ViewModel
                 
                 //txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
         }
-
+        public System.Windows.Controls.Grid AnalogBlack { set; get; }
+        
 
         public string Locastion { set { _Location = "Location：" + value; } get { return _Location; } }
         public string Device { set { _Device = "Device：" + value; } get { return _Device; } }
@@ -43,7 +48,9 @@ namespace PRView.ViewModel
         public string StartTime { set { _StartTime = "開始時間：" + value; } get { return _StartTime; } }
         public string TriggerTime { set { _TriggerTime = "觸發時間：" + value; } get { return _TriggerTime; } }
 
-        public bool btn_Enabled { set; get; } = false;
+        public string[] ButtonBlock { get; set; } = new string[0];
+
+        public bool btn_Enabled { set; get; } = true;
 
         public ICommand buttondown { get; }
         public ICommand btn_XZoomIn { get; }
