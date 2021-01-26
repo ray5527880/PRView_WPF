@@ -21,10 +21,9 @@ namespace PRView.ViewModel
             btn_OpenFile = new RelayCommand<object>(() => OpenFile());
         }
         private void test_messagebox()
-        {
-            System.Windows.MessageBox.Show("123");
+        {            
             Locastion = "123";
-            ButtonBlock = new string[] { "123", "456", "789" };
+            ButtonName = new string[] { "123", "456", "789" };
             //ButtonBlock = 1;
             //this.AnalogBlack.c
 
@@ -48,7 +47,7 @@ namespace PRView.ViewModel
         public string StartTime { set { _StartTime = "開始時間：" + value; } get { return _StartTime; } }
         public string TriggerTime { set { _TriggerTime = "觸發時間：" + value; } get { return _TriggerTime; } }
 
-        public string[] ButtonBlock { get; set; } = new string[0];
+        public string[] ButtonName { get; set; } 
 
         public bool btn_Enabled { set; get; } = true;
 

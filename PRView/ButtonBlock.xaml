@@ -7,9 +7,6 @@
              xmlns:ViewModel="clr-namespace:PRView.ViewModel"   
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <ViewModel:ButtonBlockViewModel/>
-    </UserControl.DataContext>
     <Grid x:Name="Grid" Width="120" Height="100">
         <StackPanel Height="100" x:Name="Panel" ScrollViewer.VerticalScrollBarVisibility="Auto" CanVerticallyScroll="True">
           

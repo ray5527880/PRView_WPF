@@ -17,13 +17,45 @@ namespace PRView
     /// ButtonBlock.xaml 的互動邏輯
     /// </summary>
     public partial class ButtonBlock : UserControl
-    {        
+    {
+        public string[] ButtonName
+        {
+            //get { return _ButtonName; }
+            //set { _ButtonName = value;AddButton(); }
+            get { return (string[])GetValue(ButtonNameProperty); }
+            set {
+                Console.WriteLine("ButtonName Set");
+                _ButtonName = value;
+                AddButton();
+                SetValue(ButtonNameProperty, value); 
+               
+            }
+        }
+        public static readonly DependencyProperty ButtonNameProperty = DependencyProperty.Register(
+            nameof(ButtonName), typeof(string[]), typeof(ButtonBlock),
+            new PropertyMetadata(default(string[]), OnButtonNameValueChanged, CoerceButtonNameValue));
+
         private string[] _ButtonName;
-        public string[] ButtonName { set { _ButtonName = value;AddButton(); }get { return _ButtonName; } }
+
+        private static void OnButtonNameValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            
+            //Debugger.Break();
+        }
+        private static object CoerceButtonNameValue(DependencyObject d, object baseValue)
+        {
+            //Debugger.Break();
+            return baseValue;
+        }
+        //public string[] ButtonName { set { _ButtonName = value; AddButton(); } get { return _ButtonName; } }
         public ButtonBlock()
         {
-            ButtonName = new string[0];
+            this.DataContext = this;
             InitializeComponent();
+            //ButtonName = new string[0];
+            //_ButtonName = new string[] { "123", "456" };
+            //AddButton();
+
         }
 
         private void AddButton()

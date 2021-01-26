@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:PRView"
-        xmlns:ViewModel="clr-namespace:PRView.ViewModel"       
+        xmlns:ViewModel="clr-namespace:PRView.ViewModel"    
+        
         mc:Ignorable="d"
         
         Title="MainWindow" Height="900" Width="1600" WindowStartupLocation="CenterScreen" FontSize="20" MinWidth="1600" MinHeight="900"  >
     <Window.DataContext>
         <ViewModel:MainWindowViewModel/>
+        <!--<local:ButtonBlock ButtonName="{Binding ButtonBlock}"/>-->
     </Window.DataContext>
     <Grid Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -170,7 +172,9 @@
                                 <Label VerticalAlignment="Center" Grid.Row="0" Content="Analog Channels" FontSize="14" Foreground="#FFF9F9F9"/>
                                 <Border  Grid.Row="1" BorderBrush="#FF3EE1F1" BorderThickness="2" >
                                     <Grid ScrollViewer.VerticalScrollBarVisibility="Auto"  x:Name="AnalogBlack">
-                                        <local:ButtonBlock HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <local:ButtonBlock HorizontalAlignment="Left" VerticalAlignment="Top"  ButtonName="{Binding ButtonName }"  >
+                                            
+                                        </local:ButtonBlock>
 
                                     </Grid>
                                     
