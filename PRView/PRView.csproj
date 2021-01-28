@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\PRSpline\FW_Setup\FW_Setup.csproj" />
-    <ProjectReference Include="..\PRViewViewMode\PRViewViewMode.csproj" />
   </ItemGroup>
 
   <ItemGroup>

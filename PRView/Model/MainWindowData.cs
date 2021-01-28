@@ -13,5 +13,10 @@ namespace PRView.Model
         public string StartTime;
         public string TriggerTime;
         public Parser Parsers;
+        public List<double[]> PrimaryData;
+        public List<double[]> SecondaryData;
+        public List<double[]> PerUnitData;
+        public string[] AnalogNames;
+        public string[] DigitalNames;
     }
 }

@@ -10,10 +10,7 @@ namespace PRView.Model
 {
     public class MainWindowModel
     {
-        public List<double[]> PrimaryData;
-        public List<double[]> SecondaryData;
-        public List<double[]> PerUnitData;
-
+        public int[] FFTIndex;
         public enum OpenFileErorCode
         {
             Null = 0,
@@ -23,9 +20,9 @@ namespace PRView.Model
         {
 
         }
-        public OpenFileErorCode OpenFile(string FilePaht, string FileName)
+        public MainWindowData OpenFile(string FilePaht, string FileName)
         {
-            //setEnable(false);
+            var _MainWindowData = new MainWindowData();
             
             string strFile = FilePaht;
             string strRarPath = string.Empty;
@@ -41,8 +38,6 @@ namespace PRView.Model
                     File.Copy(strFile.Replace(".cfg", ".dat"), strfilePath + strFileName.Replace(".cfg", ".dat"), true);
                     File.Copy(strFile.Replace(".CFG", ".DAT"), strfilePath + strFileName.Replace(".CFG", ".DAT"), true);
                 }
-                else
-                    return OpenFileErorCode.NotDatFile;
             }
             else
             {
@@ -55,8 +50,8 @@ namespace PRView.Model
                 mCompressWinRAR.UnCompressRar(strfilePath, strRarPath, strFile);
             }
             var Parsers = new Parser();
-            //try
-            //{
+            try
+            {
                 foreach (var item in Directory.GetFiles(strfilePath, "*.cfg"))
                 {
                     LoadDataFile.GetCFGData(item, ref Parsers);
@@ -67,12 +62,10 @@ namespace PRView.Model
                     LoadDataFile.GetCFGData(item, ref Parsers);
                     break;
                 }
-                PrimaryData = new List<double[]>();
-                SecondaryData = new List<double[]>();
-                PerUnitData = new List<double[]>();
-                LoadDataFile.GetDatData(Parsers, ref PrimaryData, ref SecondaryData, ref PerUnitData);
-
-                //Set_Information();
+                _MainWindowData.PrimaryData = new List<double[]>();
+                _MainWindowData.SecondaryData = new List<double[]>();
+                _MainWindowData.PerUnitData = new List<double[]>();
+                LoadDataFile.GetDatData(Parsers, ref _MainWindowData.PrimaryData, ref _MainWindowData.SecondaryData, ref _MainWindowData.PerUnitData);
 
                 List<int> _fftIndex = new List<int>();
                 for (int i = 0; i < Parsers.Schema.TotalAnalogChannels; i++)
@@ -80,37 +73,29 @@ namespace PRView.Model
                     if (Parsers.Schema.AnalogChannels[i].Units == "V" || Parsers.Schema.AnalogChannels[i].Units == "A")
                         _fftIndex.Add(i);
                 }
-            //    FFTIndex = _fftIndex.ToArray();
-
-            //    //ClearButton();
-            //    for (int i = 0; i < Parsers.Schema.TotalAnalogChannels; i++)
-            //    {
-            //        AddNewButton(Parsers.Schema.AnalogChannels[i].Name, i, 0);
-            //    }
-            //    for (int i = 0; i < Parsers.Schema.TotalDigitalChannels; i++)
-            //    {
-            //        AddNewButton(Parsers.Schema.DigitalChannels[i].Name, i, 1);
-            //    }
-            //    for (int i = 0; i < FFTIndex.Length; i++)
-            //    {
-            //        AddNewButton(Parsers.Schema.AnalogChannels[FFTIndex[i]].Name + "_FFT", i + Parsers.Schema.TotalAnalogChannels, 0);
-            //    }
-            //    cbxPS.Items.Add("P");
-            //    cbxPS.Items.Add("S");
-            //    cbxPS.Items.Add("Per Unit");
-
-            //    cbxPS.SelectedIndex = 1;
-            //    sizeChanged();
-            //}
-            //catch (ApplicationException message)
-            //{
-            //    MessageBox.Show(String.Format("{0}: {1}", strFile, message.Message));
-            //}
-            //finally
-            //{
-            //    setEnable(true);
-            //}
-            return OpenFileErorCode.Null;
+                FFTIndex = _fftIndex.ToArray();
+                var _analogData = new List<string>();
+                var _DigitalData = new List<string>();
+                for (int i = 0; i < Parsers.Schema.TotalAnalogChannels; i++)
+                {
+                    _analogData.Add(Parsers.Schema.AnalogChannels[i].Name);
+                }
+                for (int i = 0; i < Parsers.Schema.TotalDigitalChannels; i++)
+                {
+                    _DigitalData.Add(Parsers.Schema.DigitalChannels[i].Name);
+                }
+                for (int i = 0; i < FFTIndex.Length; i++)
+                {
+                    _analogData.Add(Parsers.Schema.AnalogChannels[i].Name + "_FFT");                   
+                }
+                _MainWindowData.AnalogNames = _analogData.ToArray();
+                _MainWindowData.DigitalNames = _DigitalData.ToArray();
+            }
+            catch (ApplicationException message)
+            {
+               
+            }
+            return _MainWindowData;
         }
     }
 }

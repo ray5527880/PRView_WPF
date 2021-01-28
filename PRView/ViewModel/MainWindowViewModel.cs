@@ -4,11 +4,15 @@ using System.Text;
 using System.Windows.Input;
 using Microsoft.Win32;
 using PRView.Model;
+using PRView.UserControls;
 
 namespace PRView.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private MainWindowData _MainWindowData;
+
+
         private string _Location = "Location：";
         private string _Device = "Device：";
         private string _StartData = "開始日期：";
@@ -16,17 +20,15 @@ namespace PRView.ViewModel
         private string _StartTime = "開始時間：";
         private string _TriggerTime = "觸發時間：";
         public MainWindowViewModel()
-        {            
-            btn_ReZoom = new RelayCommand<object>(() => test_messagebox());
+        {
+            _MainWindowData = new MainWindowData();
+             btn_ReZoom = new RelayCommand<object>(() => test_messagebox());
             btn_OpenFile = new RelayCommand<object>(() => OpenFile());
         }
         private void test_messagebox()
         {            
             Locastion = "123";
-            ButtonName = new string[] { "123", "456", "789" };
-            //ButtonBlock = 1;
-            //this.AnalogBlack.c
-
+            AnalogBlockName = new string[] { "qwe" };
         }
         private void OpenFile()
         {
@@ -37,19 +39,28 @@ namespace PRView.ViewModel
                 
                 //txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
         }
-        public System.Windows.Controls.Grid AnalogBlack { set; get; }
-        
 
+        #region General Information
         public string Locastion { set { _Location = "Location：" + value; } get { return _Location; } }
         public string Device { set { _Device = "Device：" + value; } get { return _Device; } }
-        public string StartData { set { _StartData = "開始日期：" + value; } get { return _Device; } }
+        public string StartData { set { _StartData = "開始日期：" + value; } get { return _StartData; } }
         public string TriggerData { set { _TriggerData = "觸發日期：" + value; } get { return _TriggerData; } }
         public string StartTime { set { _StartTime = "開始時間：" + value; } get { return _StartTime; } }
         public string TriggerTime { set { _TriggerTime = "觸發時間：" + value; } get { return _TriggerTime; } }
+        #endregion
 
-        public string[] ButtonName { get; set; } 
+        #region ButtonBlock
+
+        public string[] AnalogBlockName { get; set; }
+        public string [] DigitalBlockName { get; set; }
+
+        #endregion
+
+
 
         public bool btn_Enabled { set; get; } = true;
+
+        #region ButtonControls
 
         public ICommand buttondown { get; }
         public ICommand btn_XZoomIn { get; }
@@ -64,5 +75,16 @@ namespace PRView.ViewModel
         public ICommand btn_Screenshot { get; }
         public ICommand btn_ReomveBlack { get; }
         public ICommand btn_Extremum { get; }
+        #endregion
+
+        private void Set_GeneralInformation()
+        {
+            Locastion = _MainWindowData.Location;
+            Device = _MainWindowData.Device;
+            StartData = _MainWindowData.StartData;
+            TriggerData = _MainWindowData.TriggerData;
+            StartTime = _MainWindowData.StartTime;
+            TriggerTime = _MainWindowData.TriggerTime;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="PRView.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"        
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,12 +7,15 @@
         xmlns:local="clr-namespace:PRView"
         xmlns:ViewModel="clr-namespace:PRView.ViewModel"    
         
+        xmlns:System="clr-namespace:System;assembly=System.Runtime" 
+        xmlns:UserControls="clr-namespace:PRView.UserControls" x:Class="PRView.MainWindow"    
+        
         mc:Ignorable="d"
         
         Title="MainWindow" Height="900" Width="1600" WindowStartupLocation="CenterScreen" FontSize="20" MinWidth="1600" MinHeight="900"  >
     <Window.DataContext>
         <ViewModel:MainWindowViewModel/>
-        <!--<local:ButtonBlock ButtonName="{Binding ButtonBlock}"/>-->
+
     </Window.DataContext>
     <Grid Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -99,25 +102,23 @@
                                 <Button Grid.Row="1" Grid.Column="5" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_YZoomOut, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="YZoonOut.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="6" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_Screenshot,Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
+                                <Button Grid.Row="1" Grid.Column="6" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_Screenshot, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="Screenshot.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="7" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_ReomveBlack,Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
+                                <Button Grid.Row="1" Grid.Column="7" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_ReomveBlack, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="remove.png"/>
                                 </Button>
-                                <Button Grid.Row="1" Grid.Column="8" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_Extremum,Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
+                                <Button Grid.Row="1" Grid.Column="8" Width="35" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Command="{Binding btn_Extremum, Mode=OneWay}" IsEnabled="{Binding btn_Enabled}">
                                     <Image Source="Ex.png"/>
                                 </Button>
-                                <Label Grid.Row="1" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                    <Label.Content>一次/二次/標么</Label.Content>
-                                </Label>
+                                <Label Grid.Row="1" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" Content="一次/二次/標么" />
                                 <ComboBox Grid.Row="1" Grid.Column="10" Width="75"  HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <ComboBoxItem>一次</ComboBoxItem>
-                                    <ComboBoxItem>二次</ComboBoxItem>
-                                    <ComboBoxItem>標么</ComboBoxItem>
+                                    <ComboBoxItem Content="一次"/>
+                                    <ComboBoxItem Content="二次"/>
+                                    <ComboBoxItem Content="標么"/>
                                 </ComboBox>
                             </Grid>
-                        </Border >
+                        </Border>
 
                     </Grid>
                 </Border>
@@ -145,7 +146,7 @@
         <Border Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="9.2*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0">
@@ -171,13 +172,10 @@
                                 </Grid.RowDefinitions>
                                 <Label VerticalAlignment="Center" Grid.Row="0" Content="Analog Channels" FontSize="14" Foreground="#FFF9F9F9"/>
                                 <Border  Grid.Row="1" BorderBrush="#FF3EE1F1" BorderThickness="2" >
-                                    <Grid ScrollViewer.VerticalScrollBarVisibility="Auto"  x:Name="AnalogBlack">
-                                        <local:ButtonBlock HorizontalAlignment="Left" VerticalAlignment="Top"  ButtonName="{Binding ButtonName }"  >
-                                            
-                                        </local:ButtonBlock>
-
+                                    <Grid  >
+                                        <UserControls:ButtonBlock HorizontalAlignment="Left" VerticalAlignment="Top" ButtonName="{Binding AnalogBlockName}"/>
                                     </Grid>
-                                    
+
                                 </Border>
                             </Grid>
                         </Border>
@@ -189,17 +187,17 @@
                                 </Grid.RowDefinitions>
                                 <Label VerticalAlignment="Center" Grid.Row="0" Content="Digital Channels" FontSize="14" Foreground="#FFF9F9F9"/>
                                 <Border Grid.Row="1" BorderBrush="#FF3EE1F1" BorderThickness="2" >
-                                    <ScrollViewer/>
+                                    <UserControls:ButtonBlock HorizontalAlignment="Left" VerticalAlignment="Top" ButtonName="{Binding DigitalBlockName}"/>
                                 </Border>
                             </Grid>
-                            
+
                         </Border>
                     </Grid>
-                    
+
                 </Border>
                 <Border  Grid.Column="1">
-                    <Grid x:Name="testGrid">
-
+                    <Grid>
+                        <UserControls:MainChart HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Grid>
                 </Border>
             </Grid>
