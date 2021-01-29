@@ -197,7 +197,7 @@
                 </Border>
                 <Border  Grid.Column="1">
                     <Grid>
-                        <UserControls:MainChart HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <UserControls:MainChart HorizontalAlignment="Left" VerticalAlignment="Top" Canvas2_Enable="True"/>
                     </Grid>
                 </Border>
             </Grid>

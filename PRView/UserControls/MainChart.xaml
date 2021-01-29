@@ -15,13 +15,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0">
-            <Canvas x:Name="Canvas_1" >
-                <Path></Path>
-            </Canvas>
+           <local:Chart_Line x:Name="Canvas_1"/>
         </Border>
         <Border Grid.Row="1" >
-            <Canvas x:Name="Canvas_2" >
-
+            
+            <Canvas x:Name="Canvas_2" Background="White" Visibility="Visible" >
+             
             </Canvas>
         </Border>
         <Border Grid.Row="2">

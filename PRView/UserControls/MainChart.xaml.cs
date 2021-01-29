@@ -123,6 +123,24 @@ namespace PRView.UserControls
         public MainChart()
         {
             InitializeComponent();
+            Canvas2_Enable = false;
+            var _path = new Path();
+            var str = string.Format("M 0,0");
+            for (int i = 0; i < 19200; i++)
+            {
+                if (i == 0) str = string.Format("M 0,100");
+                else str += string.Format(" {0},{1}", i, Math.Round(Math.Sin(Math.PI * i / 180 * 100)) + 100);
+            }
+            _path.Data = Geometry.Parse(str);
+
+            // Create a SolidColorBrush and use it to
+            // paint the rectangle.
+            SolidColorBrush myBrush = new SolidColorBrush(Colors.Red);
+
+            _path.Stroke = myBrush;
+            Canvas_2.Children.Add(_path);
+            //Canvas_2.Background = Color.FromArgb(100, 0, 0, 0);
+
         }
     }
 }
