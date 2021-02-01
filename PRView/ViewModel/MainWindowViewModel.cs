@@ -23,13 +23,25 @@ namespace PRView.ViewModel
         {
             _MainWindowData = new MainWindowData();
              btn_ReZoom = new RelayCommand<object>(() => test_messagebox());
+            btn_XZoomIn = new RelayCommand<object>(() => test_MessageBox_1());
             btn_OpenFile = new RelayCommand<object>(() => OpenFile());
         }
         private void test_messagebox()
         {            
             Locastion = "123";
+            Chart1Enable = true;
+           
             AnalogBlockName = new string[] { "qwe" };
         }
+        private void test_MessageBox_1()
+        {
+            NumberOfGridX = 6;
+            NumberOfGridY = 10;
+            ViewMaxValueX = 10;
+            ViewMinValueX = -10;
+        }
+
+
         private void OpenFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -56,7 +68,15 @@ namespace PRView.ViewModel
 
         #endregion
 
+        public double ViewMaxValueX { get; set; }
+        public double ViewMinValueX { get; set; }
+        public double ViewMaxValueY { get; set; }
+        public double ViewMinValueY { get; set; }
 
+        public int NumberOfGridX { get; set; }
+        public int NumberOfGridY { get; set; }
+
+        public bool Chart1Enable { get; set; }
 
         public bool btn_Enabled { set; get; } = true;
 

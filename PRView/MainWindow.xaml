@@ -197,7 +197,14 @@
                 </Border>
                 <Border  Grid.Column="1">
                     <Grid>
-                        <UserControls:MainChart HorizontalAlignment="Left" VerticalAlignment="Top" Canvas2_Enable="True"/>
+                        <UserControls:MainChart HorizontalAlignment="Left" VerticalAlignment="Top" Canvas2_Enable="True"
+                                                ViewMaxValueX="{Binding ViewMaxValueX}"
+                                                ViewMinValueX="{Binding ViewMinValueX}"
+                                                ViewMaxValueY="{Binding ViewMaxValueY}"
+                                                ViewMinValueY="{Binding ViewMinValueY}"
+                                                NumberOfGridX="{Binding NumberOfGridX}"
+                                                NumberOfGridY="{Binding NumberOfGridY}"
+                                                Canvas1_Enable="{Binding Chart1Enable}"/>
                     </Grid>
                 </Border>
             </Grid>

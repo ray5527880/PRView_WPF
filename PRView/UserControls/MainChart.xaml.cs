@@ -18,6 +18,21 @@ namespace PRView.UserControls
     /// </summary>
     public partial class MainChart : UserControl
     {
+        //public double UserControlWidth
+        //{
+        //    get => (double)GetValue(UserControlWidthProperty);
+        //    set => SetValue(UserControlWidthProperty, value);
+        //}
+        //public static readonly DependencyProperty UserControlWidthProperty = DependencyProperty.Register(
+        //    nameof(UserControlWidth), typeof(double), typeof(Chart_Line), new PropertyMetadata());
+
+        //public double UserControlHeight
+        //{
+        //    get => (double)GetValue(userControlHeight);
+        //    set => SetValue(userControlHeight, value);
+        //}
+        //public static readonly DependencyProperty userControlHeight = DependencyProperty.Register(
+        //    nameof(UserControlHeight), typeof(double), typeof(Chart_Line), new PropertyMetadata());
 
         #region Canvas1_Enable
         public bool Canvas1_Enable
@@ -120,27 +135,146 @@ namespace PRView.UserControls
         #endregion
 
 
+        #region ViewMaxValueX
+        public int ViewMaxValueX
+        {
+            get => (int)GetValue(ViewMaxValueXProperty);
+            set => SetValue(ViewMaxValueXProperty, value);
+        }
+        public static readonly DependencyProperty ViewMaxValueXProperty = DependencyProperty.Register(
+            nameof(ViewMaxValueX), typeof(int), typeof(MainChart),
+            new PropertyMetadata(default(int), OnViewMaxValueXChanged, CoerceViewMaxValueXValue));
+        private static void OnViewMaxValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+        private static object CoerceViewMaxValueXValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
+
+        #region ViewMinValueX
+        public int ViewMinValueX
+        {
+            get => (int)GetValue(ViewMinValueXProperty);
+            set => SetValue(ViewMinValueXProperty, value);
+        }
+        public static readonly DependencyProperty ViewMinValueXProperty = DependencyProperty.Register(
+            nameof(ViewMinValueX), typeof(int), typeof(MainChart),
+            new PropertyMetadata(default(int), OnViewMinValueXChanged, CoerceViewMinValueXValue));
+        private static void OnViewMinValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+        private static object CoerceViewMinValueXValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
+
+        #region ViewMaxValueY
+        public int ViewMaxValueY
+        {
+            get => (int)GetValue(ViewMaxValueYProperty);
+            set => SetValue(ViewMaxValueYProperty, value);
+        }
+        public static readonly DependencyProperty ViewMaxValueYProperty = DependencyProperty.Register(
+            nameof(ViewMaxValueY), typeof(int), typeof(MainChart),
+            new PropertyMetadata(default(int), OnViewMaxValueYChanged, CoerceViewMaxValueYValue));
+        private static void OnViewMaxValueYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+        private static object CoerceViewMaxValueYValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
+
+        #region ViewMinValueY
+        public int ViewMinValueY
+        {
+            get => (int)GetValue(ViewMinValueYProperty);
+            set => SetValue(ViewMinValueYProperty, value);
+        }
+        public static readonly DependencyProperty ViewMinValueYProperty = DependencyProperty.Register(
+           nameof(ViewMinValueY), typeof(int), typeof(MainChart),
+           new PropertyMetadata(default(int), OnViewMinValueYChanged, CoerceViewMinValueYValue));
+        private static void OnViewMinValueYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+        private static object CoerceViewMinValueYValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
+
+        #region NumberOfGridX
+        public int NumberOfGridX
+        {
+            get => (int)GetValue(NumberOfGridXProperty);
+            set => SetValue(NumberOfGridXProperty, value);
+        }
+        public static readonly DependencyProperty NumberOfGridXProperty = DependencyProperty.Register(
+           nameof(NumberOfGridX), typeof(int), typeof(MainChart),
+           new PropertyMetadata(default(int), OnNumberOfGridXChanged, CoerceNumberOfGridXValue));
+        private static void OnNumberOfGridXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+        private static object CoerceNumberOfGridXValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
+
+        #region NumberOfGridY
+        public int NumberOfGridY
+        {
+            get => (int)GetValue(NumberOfGridYProperty);
+            set => SetValue(NumberOfGridYProperty, value);
+        }
+        public static readonly DependencyProperty NumberOfGridYProperty = DependencyProperty.Register(
+           nameof(NumberOfGridY), typeof(int), typeof(MainChart),
+           new PropertyMetadata(default(int), OnNumberOfGridYChanged, CoerceNumberOfGridYValue));
+        private static void OnNumberOfGridYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+        private static object CoerceNumberOfGridYValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
+
+
         public MainChart()
         {
             InitializeComponent();
-            Canvas2_Enable = false;
-            var _path = new Path();
-            var str = string.Format("M 0,0");
-            for (int i = 0; i < 19200; i++)
-            {
-                if (i == 0) str = string.Format("M 0,100");
-                else str += string.Format(" {0},{1}", i, Math.Round(Math.Sin(Math.PI * i / 180 * 100)) + 100);
-            }
-            _path.Data = Geometry.Parse(str);
+            Canvas1_Enable = true;
+           
+            //Canvas2_Enable = false;
+            //var _path = new Path();
+            //var str = string.Format("M 0,0");
+            //for (int i = 0; i < 19200; i++)
+            //{
+            //    if (i == 0) str = string.Format("M 0,100");
+            //    else str += string.Format(" {0},{1}", i, Math.Round(Math.Sin(Math.PI * i / 180 * 100)) + 100);
+            //}
+            //_path.Data = Geometry.Parse(str);
 
-            // Create a SolidColorBrush and use it to
-            // paint the rectangle.
-            SolidColorBrush myBrush = new SolidColorBrush(Colors.Red);
+            //// Create a SolidColorBrush and use it to
+            //// paint the rectangle.
+            //SolidColorBrush myBrush = new SolidColorBrush(Colors.Red);
 
-            _path.Stroke = myBrush;
-            Canvas_2.Children.Add(_path);
-            //Canvas_2.Background = Color.FromArgb(100, 0, 0, 0);
+            //_path.Stroke = myBrush;
+            //Canvas_2.Children.Add(_path);
+            ////Canvas_2.Background = Color.FromArgb(100, 0, 0, 0);
 
         }
+
+
     }
 }
