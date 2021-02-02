@@ -12,38 +12,31 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0">
-            <local:Chart_Line x:Name="Canvas_1" 
+        <Border Grid.Row="0" SizeChanged="Border1_SizeChanged" x:Name="Canvas_1">
+            <local:Chart_Line   
                               ViewMaxValueX="{Binding ViewMaxValueX}"
                               ViewMaxValueY="{Binding ViewMaxValueY}"
                               ViewMinValueX="{Binding ViewMinValueX}"
                               ViewMinValueY="{Binding ViewMinValueY}"
                               NumberOfGridX="{Binding NumberOfGridX}"
                               NumberOfGridY="{Binding NumberOfGridY}"
-                              IsViewVisible="{Binding Canvas1_Enable}"/>
+                              IsViewVisible="{Binding Canvas1_Enable}"
+                             
+                              />
         </Border>
-        <Border Grid.Row="1" >
+        <Border Grid.Row="1" x:Name="Canvas_2" Visibility="Hidden">
             
-            <Canvas x:Name="Canvas_2"  Visibility="Visible"  >
-             
-            </Canvas>
         </Border>
-        <Border Grid.Row="2">
-            <Canvas x:Name="Canvas_3">
-
-            </Canvas>
+        <Border Grid.Row="2" x:Name="Canvas_3">
+           
         </Border>
-        <Border Grid.Row="3">
-            <Canvas x:Name="Canvas_4">
-
-            </Canvas>
+        <Border Grid.Row="3" x:Name="Canvas_4">
+           
         </Border>
-        <Border Grid.Row="4">
-            <Canvas x:Name="Canvas_5">
-
-            </Canvas>
+        <Border Grid.Row="4" x:Name="Canvas_5">
+           
         </Border>
     </Grid>
 </UserControl>

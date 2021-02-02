@@ -17,5 +17,6 @@ namespace PRView.ViewModel
                     new PropertyChangedEventArgs(PropertyName));
             }
         }
+        
     }
 }

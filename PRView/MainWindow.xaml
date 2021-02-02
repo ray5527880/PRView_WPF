@@ -6,7 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:PRView"
         xmlns:ViewModel="clr-namespace:PRView.ViewModel"    
-        
+        xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" 
         xmlns:UserControls="clr-namespace:PRView.UserControls" x:Class="PRView.MainWindow"    
         
@@ -17,9 +17,17 @@
         <ViewModel:MainWindowViewModel/>
 
     </Window.DataContext>
-    <Grid Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid x:Name="grid" Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
+        <Behaviors:Interaction.Triggers>
+            <Behaviors:EventTrigger  EventName="SizeChanged" SourceObject="{Binding ElementName=grid, Mode=OneWay}">
+                <Behaviors:SetDataStoreValueAction PropertyName="MainViewWidth"
+                                                   TargetObject="{Binding Mode=OneWay}"
+                                                   Value="{Binding ActualWidth ,ElementName=grid}"/>
+                <Behaviors:CallMethodAction TargetObject="{Binding}" MethodName="WindowsSizeChanged" />
+            </Behaviors:EventTrigger>
+        </Behaviors:Interaction.Triggers>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="100" />
             <RowDefinition Height="9*" />
 
         </Grid.RowDefinitions>
@@ -147,7 +155,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="9.2*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0">
                     <Grid >
@@ -196,16 +204,19 @@
 
                 </Border>
                 <Border  Grid.Column="1">
-                    <Grid>
-                        <UserControls:MainChart HorizontalAlignment="Left" VerticalAlignment="Top" Canvas2_Enable="True"
+
+                    <UserControls:MainChart HorizontalAlignment="Left" VerticalAlignment="Stretch" Canvas2_Enable="True"
                                                 ViewMaxValueX="{Binding ViewMaxValueX}"
                                                 ViewMinValueX="{Binding ViewMinValueX}"
                                                 ViewMaxValueY="{Binding ViewMaxValueY}"
                                                 ViewMinValueY="{Binding ViewMinValueY}"
                                                 NumberOfGridX="{Binding NumberOfGridX}"
                                                 NumberOfGridY="{Binding NumberOfGridY}"
-                                                Canvas1_Enable="{Binding Chart1Enable}"/>
-                    </Grid>
+                                                Canvas1_Enable="{Binding Chart1Enable}"
+                                                MainChartWidth="{Binding MainViewWidth}"
+                                                MainChartHeight="{Binding MainViewHeight}"
+                                                />
+
                 </Border>
             </Grid>
 

@@ -11,7 +11,5 @@
         <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" >
             <StackPanel x:Name="Panel" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
         </ScrollViewer>
-
-
     </Grid>
 </UserControl>

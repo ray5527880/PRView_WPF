@@ -12,7 +12,6 @@ namespace PRView.ViewModel
     {
         private MainWindowData _MainWindowData;
 
-
         private string _Location = "Location：";
         private string _Device = "Device：";
         private string _StartData = "開始日期：";
@@ -25,6 +24,8 @@ namespace PRView.ViewModel
              btn_ReZoom = new RelayCommand<object>(() => test_messagebox());
             btn_XZoomIn = new RelayCommand<object>(() => test_MessageBox_1());
             btn_OpenFile = new RelayCommand<object>(() => OpenFile());
+            //WindowsSizeChanged = new RelayCommand<object>(() => _WindowsSizeChanged());
+
         }
         private void test_messagebox()
         {            
@@ -40,7 +41,7 @@ namespace PRView.ViewModel
             ViewMaxValueX = 10;
             ViewMinValueX = -10;
         }
-
+       
 
         private void OpenFile()
         {
@@ -68,6 +69,11 @@ namespace PRView.ViewModel
 
         #endregion
 
+        #region MainView Value
+        public double MainViewHeight { get; set; }
+        public double MainViewWidth { get; set; }
+
+
         public double ViewMaxValueX { get; set; }
         public double ViewMinValueX { get; set; }
         public double ViewMaxValueY { get; set; }
@@ -78,7 +84,17 @@ namespace PRView.ViewModel
 
         public bool Chart1Enable { get; set; }
 
+        #endregion
+        #region MainView Controls
+        
+        #endregion
+
         public bool btn_Enabled { set; get; } = true;
+
+        public void WindowsSizeChanged()
+        {
+            System.Windows.MessageBox.Show(MainViewWidth.ToString());
+        }
 
         #region ButtonControls
 

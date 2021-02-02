@@ -18,6 +18,33 @@ namespace PRView.UserControls
     /// </summary>
     public partial class MainChart : UserControl
     {
+        public double MainChartWidth
+        {
+            get => (double)GetValue(MainaChartWidthProperty);
+            set => SetValue(MainaChartWidthProperty, value);
+        }
+        public static readonly DependencyProperty MainaChartWidthProperty = DependencyProperty.Register(
+            nameof(MainChartWidth), typeof(double), typeof(MainChart), 
+            new PropertyMetadata(default(double),OnMainChartWidthChanged,CoerceMainChartWidthValue));
+        private static void OnMainChartWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _data = d as MainChart;
+            //if(_data.Canvas1_Enable)
+
+            
+        }
+        private static object CoerceMainChartWidthValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+
+        public double MainChartHeight
+        {
+            get => (double)GetValue(MainChartHeightProperty);
+            set => SetValue(MainChartHeightProperty, value);
+        }
+        public static readonly DependencyProperty MainChartHeightProperty = DependencyProperty.Register(
+            nameof(MainChartHeight), typeof(double), typeof(MainChart), new PropertyMetadata());
         //public double UserControlWidth
         //{
         //    get => (double)GetValue(UserControlWidthProperty);
@@ -253,8 +280,12 @@ namespace PRView.UserControls
         public MainChart()
         {
             InitializeComponent();
-            Canvas1_Enable = true;
-           
+            Canvas1_Enable = false;
+            Canvas2_Enable = false;
+            Canvas3_Enable = false;
+            Canvas4_Enable = false;
+            Canvas5_Enable = false;
+            //MessageBox.Show(string.Format("Height：{0},Width：{1}", Canvas_1.Height, Canvas_1.Width));
             //Canvas2_Enable = false;
             //var _path = new Path();
             //var str = string.Format("M 0,0");
@@ -275,6 +306,12 @@ namespace PRView.UserControls
 
         }
 
-
+        private void Border1_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            //var _view = sender as Border;
+            //Canvas_1.UserControlHeight = _view.Height;
+            //Canvas_1.UserControlWidth = _view.Width;
+            //MessageBox.Show(string.Format("Height：{0},Width：{1}", Canvas_1.Height, Canvas_1.Width));
+        }
     }
 }

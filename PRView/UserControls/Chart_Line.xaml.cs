@@ -18,7 +18,7 @@ namespace PRView.UserControls
     /// </summary>
     public partial class Chart_Line : UserControl
     {
-     
+
         public double UserControlWidth
         {
             get => (double)GetValue(UserControlWidthProperty);
@@ -217,29 +217,31 @@ namespace PRView.UserControls
 
         private static Canvas GridBlock(Chart_Line chart_Line, int _NumberOfGridX, int _NumberOfGridY)
         {
-            var NumberOfGridY_Height = (chart_Line.UserControlHeight - 80) / _NumberOfGridY;
-            var NumberOfGridX_Width = (chart_Line.UserControlWidth - 70) / _NumberOfGridX;
+            var NumberOfGridY_Height = (chart_Line.ActualHeight - 80) / _NumberOfGridY;
+            var NumberOfGridX_Width = (chart_Line.ActualWidth - 70) / _NumberOfGridX;
 
             var reCanvas = new Canvas();
-            chart_Line.ViewTextBlock.Children.Clear();
+            chart_Line.ViewGridBlock.Children.Clear();
             ///-------------
-            chart_Line.ViewTextBlock.Children.Add(SetGridBlockLine(70, 50, chart_Line.UserControlWidth, 0));
+            chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, 50, chart_Line.ActualWidth, 0));
 
             for (int i = 1; i < _NumberOfGridY; i++)
             {
-                chart_Line.ViewTextBlock.Children.Add(SetGridBlockLine(70, 50 + NumberOfGridY_Height * i, chart_Line.UserControlWidth, 0));
+                chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, 50 + NumberOfGridY_Height * i, chart_Line.ActualWidth, 0));
             }
 
-            chart_Line.ViewTextBlock.Children.Add(SetGridBlockLine(70, chart_Line.UserControlHeight - 30, chart_Line.UserControlWidth, 0));
+            chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, chart_Line.ActualHeight - 30, chart_Line.ActualWidth, 0));
             //-------------
-            chart_Line.ViewTextBlock.Children.Add(SetGridBlockLine(70, 50, 0, chart_Line.UserControlHeight - 80));
+            chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, 50, 0, chart_Line.ActualHeight - 80));
 
             for (int i = 1; i < _NumberOfGridX; i++)
             {
-                chart_Line.ViewTextBlock.Children.Add(SetGridBlockLine(70 + NumberOfGridX_Width * i, 50, 0, chart_Line.UserControlHeight - 80));
+                chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70 + NumberOfGridX_Width * i, 50, 0, chart_Line.ActualHeight - 80));
             }
 
-            chart_Line.ViewTextBlock.Children.Add(SetGridBlockLine(70, chart_Line.UserControlWidth, 0, chart_Line.UserControlHeight - 80));
+            chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, chart_Line.ActualWidth, 0, chart_Line.ActualHeight - 80));
+
+            chart_Line.ViewGridBlock.Background = Brushes.White;
 
             return reCanvas;
         }
