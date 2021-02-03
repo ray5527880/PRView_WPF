@@ -23,6 +23,9 @@
                 <Behaviors:SetDataStoreValueAction PropertyName="MainViewWidth"
                                                    TargetObject="{Binding Mode=OneWay}"
                                                    Value="{Binding ActualWidth ,ElementName=grid}"/>
+                <Behaviors:SetDataStoreValueAction PropertyName="MainViewHeight"
+                                                   TargetObject="{Binding Mode=OneWay}"
+                                                   Value="{Binding ActualHeight,ElementName=grid}"/>
                 <Behaviors:CallMethodAction TargetObject="{Binding}" MethodName="WindowsSizeChanged" />
             </Behaviors:EventTrigger>
         </Behaviors:Interaction.Triggers>
@@ -203,9 +206,9 @@
                     </Grid>
 
                 </Border>
-                <Border  Grid.Column="1">
+                <Border  Grid.Column="1" >
 
-                    <UserControls:MainChart HorizontalAlignment="Left" VerticalAlignment="Stretch" Canvas2_Enable="True"
+                    <UserControls:MainChart HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                                                 ViewMaxValueX="{Binding ViewMaxValueX}"
                                                 ViewMinValueX="{Binding ViewMinValueX}"
                                                 ViewMaxValueY="{Binding ViewMaxValueY}"
@@ -213,9 +216,16 @@
                                                 NumberOfGridX="{Binding NumberOfGridX}"
                                                 NumberOfGridY="{Binding NumberOfGridY}"
                                                 Canvas1_Enable="{Binding Chart1Enable}"
+                                                Canvas2_Enable="{Binding Chart2Enable}"
+                                                Canvas3_Enable="{Binding Chart3Enable}"
+                                                Canvas4_Enable="{Binding Chart4Enable}"
+                                                Canvas5_Enable="{Binding Chart5Enable}"
                                                 MainChartWidth="{Binding MainViewWidth}"
                                                 MainChartHeight="{Binding MainViewHeight}"
+                                            
+                                                
                                                 />
+
 
                 </Border>
             </Grid>

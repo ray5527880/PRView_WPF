@@ -18,25 +18,51 @@ namespace PRView.UserControls
     /// </summary>
     public partial class MainChart : UserControl
     {
+        public double ChartWidth { get; set; }
+        public double ChartHeight { get; set; }
+
+
+        private static void WidthChanged(MainChart mainChart)
+        {
+            mainChart.ChartWidth = mainChart.MainChartWidth-120;
+        }
+        private static void HeightChanged(MainChart mainChart)
+        {
+            var _height = mainChart.MainChartHeight - 120;
+            if (mainChart.Canvas5_Enable)
+                _height -= 120;
+            int EnableCount = 0;
+            if (mainChart.Canvas1_Enable)
+                EnableCount++;
+            if (mainChart.Canvas2_Enable)
+                EnableCount++;
+            if (mainChart.Canvas3_Enable)
+                EnableCount++;
+            if (mainChart.Canvas4_Enable)
+                EnableCount++;
+            //mainChart.ChartHeight = _height / EnableCount;
+            mainChart.ChartHeight = _height;
+        }
+
+        #region MainChartWidthAndHeight
         public double MainChartWidth
         {
-            get => (double)GetValue(MainaChartWidthProperty);
-            set => SetValue(MainaChartWidthProperty, value);
+            get => (double)GetValue(MainChartWidthProperty);
+            set => SetValue(MainChartWidthProperty, value);
         }
-        public static readonly DependencyProperty MainaChartWidthProperty = DependencyProperty.Register(
-            nameof(MainChartWidth), typeof(double), typeof(MainChart), 
-            new PropertyMetadata(default(double),OnMainChartWidthChanged,CoerceMainChartWidthValue));
+        public static readonly DependencyProperty MainChartWidthProperty = DependencyProperty.Register(
+            nameof(MainChartWidth), typeof(double), typeof(MainChart),
+            new PropertyMetadata(default(double), OnMainChartWidthChanged, CoerceMainChartWidthValue));
         private static void OnMainChartWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            //if(_data.Canvas1_Enable)
-
-            
+            WidthChanged(_data);
         }
         private static object CoerceMainChartWidthValue(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
+
 
         public double MainChartHeight
         {
@@ -44,23 +70,20 @@ namespace PRView.UserControls
             set => SetValue(MainChartHeightProperty, value);
         }
         public static readonly DependencyProperty MainChartHeightProperty = DependencyProperty.Register(
-            nameof(MainChartHeight), typeof(double), typeof(MainChart), new PropertyMetadata());
-        //public double UserControlWidth
-        //{
-        //    get => (double)GetValue(UserControlWidthProperty);
-        //    set => SetValue(UserControlWidthProperty, value);
-        //}
-        //public static readonly DependencyProperty UserControlWidthProperty = DependencyProperty.Register(
-        //    nameof(UserControlWidth), typeof(double), typeof(Chart_Line), new PropertyMetadata());
-
-        //public double UserControlHeight
-        //{
-        //    get => (double)GetValue(userControlHeight);
-        //    set => SetValue(userControlHeight, value);
-        //}
-        //public static readonly DependencyProperty userControlHeight = DependencyProperty.Register(
-        //    nameof(UserControlHeight), typeof(double), typeof(Chart_Line), new PropertyMetadata());
-
+            nameof(MainChartHeight), typeof(double), typeof(MainChart), 
+            new PropertyMetadata(default(double), OnMainChartHeightChanged, CoerceMainChartHeightValue));
+        private static void OnMainChartHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _data = d as MainChart;
+            
+            HeightChanged(_data);
+        }
+        private static object CoerceMainChartHeightValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
+      
         #region Canvas1_Enable
         public bool Canvas1_Enable
         {
@@ -73,7 +96,7 @@ namespace PRView.UserControls
         private static void OnCanvas1_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_1.Visibility = _data.Canvas1_Enable ? Visibility.Visible : Visibility.Collapsed;
+            _data.Canvas_1.Height = _data.Canvas1_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel); 
         }
         private static object CoerceCanvas1_EnableValue(DependencyObject d, object baseValue)
         {
@@ -93,7 +116,7 @@ namespace PRView.UserControls
         private static void OnCanvas2_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_2.Visibility = _data.Canvas2_Enable ? Visibility.Visible : Visibility.Collapsed;
+            _data.Canvas_2.Height = _data.Canvas2_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
         private static object CoerceCanvas2_EnableValue(DependencyObject d, object baseValue)
         {
@@ -104,16 +127,16 @@ namespace PRView.UserControls
         #region Canvas3_Enable
         public bool Canvas3_Enable
         {
-            get => (bool)GetValue(Canvase3_EnableProperty);
-            set => SetValue(Canvase3_EnableProperty, value);
+            get => (bool)GetValue(Canvas3_EnableProperty);
+            set => SetValue(Canvas3_EnableProperty, value);
         }
-        public static readonly DependencyProperty Canvase3_EnableProperty = DependencyProperty.Register(
+        public static readonly DependencyProperty Canvas3_EnableProperty = DependencyProperty.Register(
             nameof(Canvas3_Enable), typeof(bool), typeof(MainChart),
             new PropertyMetadata(default(bool), OnCanvas3_EnableChanged, CoerceCanvas3_EnableValue));
         private static void OnCanvas3_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_3.Visibility = _data.Canvas3_Enable ? Visibility.Visible : Visibility.Collapsed;
+            _data.Canvas_3.Height = _data.Canvas3_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
         private static object CoerceCanvas3_EnableValue(DependencyObject d, object baseValue)
         {
@@ -124,16 +147,16 @@ namespace PRView.UserControls
         #region Canvas4_Enable
         public bool Canvas4_Enable
         {
-            get => (bool)GetValue(Canvase4_EnableProperty);
-            set => SetValue(Canvase4_EnableProperty, value);
+            get => (bool)GetValue(Canvas4_EnableProperty);
+            set => SetValue(Canvas4_EnableProperty, value);
         }
-        public static readonly DependencyProperty Canvase4_EnableProperty = DependencyProperty.Register(
+        public static readonly DependencyProperty Canvas4_EnableProperty = DependencyProperty.Register(
             nameof(Canvas4_Enable), typeof(bool), typeof(MainChart),
             new PropertyMetadata(default(bool), OnCanvas4_EnableChanged, CoerceCanvas4_EnableValue));
         private static void OnCanvas4_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_4.Visibility = _data.Canvas4_Enable ? Visibility.Visible : Visibility.Collapsed;
+            _data.Canvas_4.Height = _data.Canvas4_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
         private static object CoerceCanvas4_EnableValue(DependencyObject d, object baseValue)
         {
@@ -144,16 +167,16 @@ namespace PRView.UserControls
         #region Canvas5_Enable
         public bool Canvas5_Enable
         {
-            get => (bool)GetValue(Canvase5_EnableProperty);
-            set => SetValue(Canvase5_EnableProperty, value);
+            get => (bool)GetValue(Canvas5_EnableProperty);
+            set => SetValue(Canvas5_EnableProperty, value);
         }
-        public static readonly DependencyProperty Canvase5_EnableProperty = DependencyProperty.Register(
+        public static readonly DependencyProperty Canvas5_EnableProperty = DependencyProperty.Register(
             nameof(Canvas5_Enable), typeof(bool), typeof(MainChart),
             new PropertyMetadata(default(bool), OnCanvas5_EnableChanged, CoerceCanvas5_EnableValue));
         private static void OnCanvas5_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_5.Visibility = _data.Canvas5_Enable ? Visibility.Visible : Visibility.Collapsed;
+            _data.Canvas_5.Height = _data.Canvas5_Enable ? new GridLength(120, GridUnitType.Pixel) : new GridLength(0, GridUnitType.Pixel);
         }
         private static object CoerceCanvas5_EnableValue(DependencyObject d, object baseValue)
         {
@@ -280,7 +303,8 @@ namespace PRView.UserControls
         public MainChart()
         {
             InitializeComponent();
-            Canvas1_Enable = false;
+            //this.DataContext = this;
+            this.Canvas1_Enable = false;
             Canvas2_Enable = false;
             Canvas3_Enable = false;
             Canvas4_Enable = false;
@@ -306,12 +330,5 @@ namespace PRView.UserControls
 
         }
 
-        private void Border1_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //var _view = sender as Border;
-            //Canvas_1.UserControlHeight = _view.Height;
-            //Canvas_1.UserControlWidth = _view.Width;
-            //MessageBox.Show(string.Format("Height：{0},Width：{1}", Canvas_1.Height, Canvas_1.Width));
-        }
     }
 }

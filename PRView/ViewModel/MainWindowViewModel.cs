@@ -24,22 +24,32 @@ namespace PRView.ViewModel
              btn_ReZoom = new RelayCommand<object>(() => test_messagebox());
             btn_XZoomIn = new RelayCommand<object>(() => test_MessageBox_1());
             btn_OpenFile = new RelayCommand<object>(() => OpenFile());
+            btn_XZoomOut = new RelayCommand<object>(() => test_messagebox2());
             //WindowsSizeChanged = new RelayCommand<object>(() => _WindowsSizeChanged());
 
         }
         private void test_messagebox()
         {            
             Locastion = "123";
-            Chart1Enable = true;
+            Chart1Enable = false;
+            Chart2Enable = false;
+            Chart3Enable = false;
+            Chart4Enable = false;
+            Chart5Enable = false;
            
             AnalogBlockName = new string[] { "qwe" };
         }
         private void test_MessageBox_1()
         {
+            Chart1Enable = true;
             NumberOfGridX = 6;
             NumberOfGridY = 10;
             ViewMaxValueX = 10;
             ViewMinValueX = -10;
+        }
+        private void test_messagebox2()
+        {
+            Chart2Enable = true;
         }
        
 
@@ -83,6 +93,10 @@ namespace PRView.ViewModel
         public int NumberOfGridY { get; set; }
 
         public bool Chart1Enable { get; set; }
+        public bool Chart2Enable { get; set; }
+        public bool Chart3Enable { get; set; }
+        public bool Chart4Enable { get; set; }
+        public bool Chart5Enable { get; set; }
 
         #endregion
         #region MainView Controls
@@ -93,7 +107,7 @@ namespace PRView.ViewModel
 
         public void WindowsSizeChanged()
         {
-            System.Windows.MessageBox.Show(MainViewWidth.ToString());
+            //System.Windows.MessageBox.Show(string.Format("{0},{1}", MainViewHeight, MainViewWidth));
         }
 
         #region ButtonControls

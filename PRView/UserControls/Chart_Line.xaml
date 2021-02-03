@@ -10,10 +10,10 @@
         <Canvas Panel.ZIndex="0" x:Name="ViewGridBlock" Background="White" >
           
         </Canvas>
-        <Canvas Panel.ZIndex="1" x:Name="MahtChartCanvas">
+        <Canvas Panel.ZIndex="1" x:Name="MahtChartCanvas" Background="#00000000">
 
         </Canvas>
-        <Canvas Panel.ZIndex="2" x:Name="ViewTextBlock">
+        <Canvas Panel.ZIndex="2" x:Name="ViewTextBlock" Background="#00000000">
             
             
             <TextBox Text="123" Foreground="Red" Background="Transparent"></TextBox>
