@@ -18,31 +18,31 @@ namespace PRView.UserControls
     /// </summary>
     public partial class MainChart : UserControl
     {
-        public double ChartWidth { get; set; }
-        public double ChartHeight { get; set; }
+        //public double ChartWidth { get; set; }
+        //public double ChartHeight { get; set; }
 
 
-        private static void WidthChanged(MainChart mainChart)
-        {
-            mainChart.ChartWidth = mainChart.MainChartWidth-120;
-        }
-        private static void HeightChanged(MainChart mainChart)
-        {
-            var _height = mainChart.MainChartHeight - 120;
-            if (mainChart.Canvas5_Enable)
-                _height -= 120;
-            int EnableCount = 0;
-            if (mainChart.Canvas1_Enable)
-                EnableCount++;
-            if (mainChart.Canvas2_Enable)
-                EnableCount++;
-            if (mainChart.Canvas3_Enable)
-                EnableCount++;
-            if (mainChart.Canvas4_Enable)
-                EnableCount++;
-            //mainChart.ChartHeight = _height / EnableCount;
-            mainChart.ChartHeight = _height;
-        }
+        //private static void WidthChanged(MainChart mainChart)
+        //{
+        //    mainChart.ChartWidth = mainChart.MainChartWidth-120;
+        //}
+        //private static void HeightChanged(MainChart mainChart)
+        //{
+        //    var _height = mainChart.MainChartHeight - 120;
+        //    if (mainChart.Canvas5_Enable)
+        //        _height -= 120;
+        //    int EnableCount = 0;
+        //    if (mainChart.Canvas1_Enable)
+        //        EnableCount++;
+        //    if (mainChart.Canvas2_Enable)
+        //        EnableCount++;
+        //    if (mainChart.Canvas3_Enable)
+        //        EnableCount++;
+        //    if (mainChart.Canvas4_Enable)
+        //        EnableCount++;
+            
+        //    mainChart.ChartHeight = _height;
+        //}
 
         #region MainChartWidthAndHeight
         public double MainChartWidth
@@ -56,7 +56,7 @@ namespace PRView.UserControls
         private static void OnMainChartWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            WidthChanged(_data);
+            //WidthChanged(_data);
         }
         private static object CoerceMainChartWidthValue(DependencyObject d, object baseValue)
         {
@@ -76,7 +76,7 @@ namespace PRView.UserControls
         {
             var _data = d as MainChart;
             
-            HeightChanged(_data);
+            //HeightChanged(_data);
         }
         private static object CoerceMainChartHeightValue(DependencyObject d, object baseValue)
         {
@@ -184,6 +184,18 @@ namespace PRView.UserControls
         }
         #endregion
 
+        #region Chart_Line_1
+
+        public List<double[]> Chart_Line_Data_1
+        {
+            get => (List<double[]>)GetValue(Chart_Line_Data_1Property);
+            set => SetValue(Chart_Line_Data_1Property, value);
+        }
+        public static readonly DependencyProperty Chart_Line_Data_1Property = DependencyProperty.Register(
+            nameof(Chart_Line_Data_1), typeof(List<double[]>), typeof(MainChart),
+            new PropertyMetadata());
+
+        #endregion
 
         #region ViewMaxValueX
         public int ViewMaxValueX
@@ -302,32 +314,7 @@ namespace PRView.UserControls
 
         public MainChart()
         {
-            InitializeComponent();
-            //this.DataContext = this;
-            this.Canvas1_Enable = false;
-            Canvas2_Enable = false;
-            Canvas3_Enable = false;
-            Canvas4_Enable = false;
-            Canvas5_Enable = false;
-            //MessageBox.Show(string.Format("Height：{0},Width：{1}", Canvas_1.Height, Canvas_1.Width));
-            //Canvas2_Enable = false;
-            //var _path = new Path();
-            //var str = string.Format("M 0,0");
-            //for (int i = 0; i < 19200; i++)
-            //{
-            //    if (i == 0) str = string.Format("M 0,100");
-            //    else str += string.Format(" {0},{1}", i, Math.Round(Math.Sin(Math.PI * i / 180 * 100)) + 100);
-            //}
-            //_path.Data = Geometry.Parse(str);
-
-            //// Create a SolidColorBrush and use it to
-            //// paint the rectangle.
-            //SolidColorBrush myBrush = new SolidColorBrush(Colors.Red);
-
-            //_path.Stroke = myBrush;
-            //Canvas_2.Children.Add(_path);
-            ////Canvas_2.Background = Color.FromArgb(100, 0, 0, 0);
-
+            InitializeComponent();           
         }
 
     }

@@ -18,43 +18,8 @@ namespace PRView.UserControls
     /// </summary>
     public partial class Chart_Line : UserControl
     {
-        public double UserControlWidth
-        {
-            get => (double)GetValue(UserControlWidthProperty);
-            set => SetValue(UserControlWidthProperty, value);
-        }
-        public static readonly DependencyProperty UserControlWidthProperty = DependencyProperty.Register(
-            nameof(UserControlWidth), typeof(double), typeof(Chart_Line),
-            new PropertyMetadata(default(double), OnUserControlWidthChanged, CoerceUserControlWidthValue));
-        private static void OnUserControlWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _data = d as Chart_Line; 
-            
-        }
-        private static object CoerceUserControlWidthValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
 
 
-        public double UserControlHeight
-        {
-            get => (double)GetValue(UserControlHeightProperty);
-            set => SetValue(UserControlHeightProperty, value);
-        }
-        public static readonly DependencyProperty UserControlHeightProperty = DependencyProperty.Register(
-            nameof(UserControlHeight), typeof(double), typeof(Chart_Line), 
-            new PropertyMetadata(default(double), OnUserControlHeightChanged, CoerceUserControlHeightValue));
-        private static void OnUserControlHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _data = d as Chart_Line;
-
-        }
-        private static object CoerceUserControlHeightValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-      
         #region ChartDatas        
         public List<double[]> ChartDatas
         {
@@ -67,7 +32,7 @@ namespace PRView.UserControls
         private static void OnChartDatasChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as Chart_Line;
-            _data.MahtChartCanvas = AddMainChart(_data.ChartDatas);
+            AddMainChart(_data.ChartDatas);
         }
         private static object CoerceChartDatasValue(DependencyObject d, object baseValue)
         {
@@ -87,7 +52,7 @@ namespace PRView.UserControls
         private static void OnViewMaxValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _View = d as Chart_Line;
-            GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
+            //GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
         }
         private static object CoerceViewMaxValueXValue(DependencyObject d, object baseValue)
         {
@@ -107,7 +72,7 @@ namespace PRView.UserControls
         private static void OnViewMinValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _View = d as Chart_Line;
-            GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
+            //GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
         }
         private static object CoerceViewMinValueXValue(DependencyObject d, object baseValue)
         {
@@ -127,7 +92,7 @@ namespace PRView.UserControls
         private static void OnViewMaxValueYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _View = d as Chart_Line;
-            GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
+            //GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
         }
         private static object CoerceViewMaxValueYValue(DependencyObject d, object baseValue)
         {
@@ -147,7 +112,7 @@ namespace PRView.UserControls
         private static void OnViewMinValueYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _View = d as Chart_Line;
-            GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
+            //GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
         }
         private static object CoerceViewMinValueYValue(DependencyObject d, object baseValue)
         {
@@ -166,7 +131,8 @@ namespace PRView.UserControls
            new PropertyMetadata(default(int), OnNumberOfGridXChanged, CoerceNumberOfGridXValue));
         private static void OnNumberOfGridXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
+            var _View = d as Chart_Line;
+            GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
         }
         private static object CoerceNumberOfGridXValue(DependencyObject d, object baseValue)
         {
@@ -185,7 +151,8 @@ namespace PRView.UserControls
            new PropertyMetadata(default(int), OnNumberOfGridYChanged, CoerceNumberOfGridYValue));
         private static void OnNumberOfGridYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
+            var _View = d as Chart_Line;
+            GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
         }
         private static object CoerceNumberOfGridYValue(DependencyObject d, object baseValue)
         {
@@ -236,46 +203,63 @@ namespace PRView.UserControls
 
         private static void GridBlock(Chart_Line chart_Line, int _NumberOfGridX, int _NumberOfGridY)
         {
-            var NumberOfGridY_Height = (chart_Line.UserControlHeight - 80) / _NumberOfGridY;
-            var NumberOfGridX_Width = (chart_Line.UserControlWidth - 70) / _NumberOfGridX;
-                        
             chart_Line.ViewGridBlock.Children.Clear();
-            ///-------------
-            chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, 50, chart_Line.UserControlWidth, 0));
-
-            for (int i = 1; i < _NumberOfGridY; i++)
+            chart_Line.ViewGridBlock.RowDefinitions.Clear();
+            chart_Line.ViewGridBlock.ColumnDefinitions.Clear();
+            for (int i = 0; i < _NumberOfGridY + 1; i++)
             {
-                chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, 50 + NumberOfGridY_Height * i, chart_Line.UserControlWidth, 0));
+                var _rows = new RowDefinition();
+                if (i == 0)
+                    _rows.Height = new GridLength(50, GridUnitType.Pixel);
+                else if (i == _NumberOfGridY)
+                    _rows.Height = new GridLength(30, GridUnitType.Pixel);
+                else
+                    _rows.Height = new GridLength(1, GridUnitType.Star);
+                chart_Line.ViewGridBlock.RowDefinitions.Add(_rows);
             }
 
-            chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, chart_Line.UserControlHeight - 30, chart_Line.UserControlWidth, 0));
-            //-------------
-            chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, 50, 0, chart_Line.UserControlHeight - 80));
-
-            for (int i = 1; i < _NumberOfGridX; i++)
+            for (int i = 0; i < _NumberOfGridX + 2; i++)
             {
-                chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70 + NumberOfGridX_Width * i, 50, 0, chart_Line.UserControlHeight - 80));
+                var _column = new ColumnDefinition();
+                if (i == 0)
+                    _column.Width = new GridLength(70, GridUnitType.Pixel);
+                else
+                    _column.Width = new GridLength(1, GridUnitType.Star);
+                chart_Line.ViewGridBlock.ColumnDefinitions.Add(_column);
             }
+            for (int i = 0; i < _NumberOfGridX + 2; i++)
+            {
+                for (int j = 0; j < _NumberOfGridY; j++)
+                {
+                    var _border = new Border();
+                    if (i == 0 && j == 0)
+                        continue;
+                    if (i == 0 && j != 0)
+                        _border.BorderThickness = new Thickness(0, 0, 1, 0);
+                    else if (j == 0 && i != 0)
+                        _border.BorderThickness = new Thickness(0, 0, 0, 1);
+                    else
+                        _border.BorderThickness = new Thickness(0, 0, 1, 1);
+                    _border.BorderBrush = new SolidColorBrush(Colors.Black);
 
-            chart_Line.ViewGridBlock.Children.Add(SetGridBlockLine(70, chart_Line.UserControlWidth, 0, chart_Line.UserControlHeight - 80));
-
-            chart_Line.ViewGridBlock.Background = Brushes.White;          
+                    var _TextBox = new TextBlock();
+                    _TextBox.Text = string.Format("I={0},J={1}", i, j);
+                    _TextBox.Foreground = new SolidColorBrush(Colors.Black);
+                    _TextBox.HorizontalAlignment = HorizontalAlignment.Right;
+                    _TextBox.VerticalAlignment = VerticalAlignment.Bottom;
+                    _TextBox.FontSize = 12;
+                    Grid.SetRow(_border, j);
+                    Grid.SetColumn(_border, i);
+                    Grid.SetRow(_TextBox, j);
+                    Grid.SetColumn(_TextBox, i);
+                    chart_Line.ViewGridBlock.Children.Add(_border);
+                    chart_Line.ViewGridBlock.Children.Add(_TextBox);
+                }
+            }
         }
 
-        private static Path SetGridBlockLine(double startX, double startY, double width, double height)
+        private static void AddMainChart(List<double[]> _ChartDatas)
         {
-            var rePath = new Path();
-            string str = string.Format("M {0},{1} l {2},{3}", startX, startY, width, height);
-            rePath.Data = Geometry.Parse(str);
-            SolidColorBrush myBrush = new SolidColorBrush(Colors.Black);
-            rePath.Stroke = myBrush;
-            return rePath;
-        }
-
-        private static Canvas AddMainChart(List<double[]> _ChartDatas)
-        {
-            var reCanvas = new Canvas();
-
             var _data = new string[_ChartDatas[0].Length - 1];
 
             for (int i = 0; i < _ChartDatas.Count; i++)
@@ -292,18 +276,11 @@ namespace PRView.UserControls
             {
                 var _path = new Path();
                 _path.Data = Geometry.Parse(_data[i]);
-                reCanvas.Children.Add(_path);
             }
-
-            return reCanvas;
         }
-        private static Canvas TextBlock()
+        private static void TextBlock()
         {
-            var reCanvas = new Canvas();
 
-
-
-            return reCanvas;
         }
     }
 }

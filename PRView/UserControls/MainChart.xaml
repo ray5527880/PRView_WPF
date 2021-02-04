@@ -6,24 +6,24 @@
              xmlns:local="clr-namespace:PRView.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Transparent" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainChart}}}" >
+    <Grid DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainChart}}}" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="0" x:Name="Canvas_1"/>
+            <RowDefinition Height="0" x:Name="Canvas_1" />
             <RowDefinition Height="0" x:Name="Canvas_2"/>
             <RowDefinition Height="0" x:Name="Canvas_3"/>
             <RowDefinition Height="0" x:Name="Canvas_4"/>
             <RowDefinition Height="0" x:Name="Canvas_5"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" >
+        <Border Grid.Row="0">
+            
             <local:Chart_Line ViewMaxValueX="{Binding ViewMaxValueX}"
                               ViewMaxValueY="{Binding ViewMaxValueY}"
                               ViewMinValueX="{Binding ViewMinValueX}"
                               ViewMinValueY="{Binding ViewMinValueY}"
                               NumberOfGridX="{Binding NumberOfGridX, Mode=OneWay}"
                               NumberOfGridY="{Binding NumberOfGridY, Mode=OneWay}"
-                              IsViewVisible="{Binding Canvas1_Enable}"
-                              UserControlHeight="{Binding ChartHeight,Mode=OneWay}"                              
-                              UserControlWidth="{Binding ChartWidth , Mode=OneWay}"
+                              IsViewVisible="{Binding Canvas1_Enable}"   
+                              
                               />
         </Border>
         <Border Grid.Row="1"  >
@@ -33,9 +33,7 @@
                               ViewMinValueY="{Binding ViewMinValueY}"
                               NumberOfGridX="{Binding NumberOfGridX, Mode=OneWay}"
                               NumberOfGridY="{Binding NumberOfGridY, Mode=OneWay}"
-                              IsViewVisible="{Binding Canvas1_Enable}"
-                              UserControlHeight="{Binding ChartHeight,Mode=OneWay}"                              
-                              UserControlWidth="{Binding ChartWidth , Mode=OneWay}"
+                              IsViewVisible="{Binding Canvas1_Enable}"                             
                               />
         </Border>
         <Border Grid.Row="2" >
