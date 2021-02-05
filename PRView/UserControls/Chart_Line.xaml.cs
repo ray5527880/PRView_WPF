@@ -32,7 +32,7 @@ namespace PRView.UserControls
         private static void OnChartDatasChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as Chart_Line;
-            AddMainChart(_data.ChartDatas);
+            AddMainChart(_data, _data.ChartDatas);
         }
         private static object CoerceChartDatasValue(DependencyObject d, object baseValue)
         {
@@ -253,30 +253,35 @@ namespace PRView.UserControls
                     Grid.SetRow(_TextBox, j);
                     Grid.SetColumn(_TextBox, i);
                     chart_Line.ViewGridBlock.Children.Add(_border);
-                    chart_Line.ViewGridBlock.Children.Add(_TextBox);
+                    //chart_Line.ViewGridBlock.Children.Add(_TextBox);
                 }
             }
         }
 
-        private static void AddMainChart(List<double[]> _ChartDatas)
+        private static void AddMainChart(Chart_Line chart_Lines, List<double[]> _ChartDatas)
         {
+            chart_Lines.MahtChartCanvas.Children.Clear();
             var _data = new string[_ChartDatas[0].Length - 1];
 
             for (int i = 0; i < _ChartDatas.Count; i++)
             {
-                for (int j = 0; j < _ChartDatas[i].Length; j++)
+                for (int j = 0; j < _ChartDatas[i].Length-1; j++)
                 {
                     if (i == 0)
-                        _data[j] += string.Format("M {0},{1}", 0, _ChartDatas[i][j + 1]);
+                        _data[j] += string.Format("M {0},{1}", 0, _ChartDatas[i][j +1]);
                     else
-                        _data[j] += string.Format(" {0},{1}", _ChartDatas[i][0], _ChartDatas[i][j + 1]);
+                        _data[j] += string.Format(" {0},{1}", _ChartDatas[i][0], _ChartDatas[i][j +1]);
                 }
             }
             for (int i = 0; i < _ChartDatas[0].Length - 1; i++)
             {
                 var _path = new Path();
                 _path.Data = Geometry.Parse(_data[i]);
+                _path.Stroke=new SolidColorBrush(Colors.Black);
+                //_path.Stretch = Stretch.Uniform;
+                chart_Lines.MahtChartCanvas.Children.Add(_path);
             }
+            
         }
         private static void TextBlock()
         {

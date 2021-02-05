@@ -222,7 +222,7 @@
                                                 Canvas5_Enable="{Binding Chart5Enable}"
                                                 MainChartWidth="{Binding MainViewWidth}"
                                                 MainChartHeight="{Binding MainViewHeight}"
-                                            
+                                                Chart_Line_Data_1="{Binding datas}"
                                                 
                                                 />
 

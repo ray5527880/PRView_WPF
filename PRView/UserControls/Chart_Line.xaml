@@ -17,7 +17,7 @@
         </Border>
         <Border>
             <Grid x:Name="MahtChartCanvas" Background="#00000000">
-
+                
             </Grid>
 
 

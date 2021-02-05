@@ -23,7 +23,7 @@
                               NumberOfGridX="{Binding NumberOfGridX, Mode=OneWay}"
                               NumberOfGridY="{Binding NumberOfGridY, Mode=OneWay}"
                               IsViewVisible="{Binding Canvas1_Enable}"   
-                              
+                              ChartDatas="{Binding Chart_Line_Data_1}"
                               />
         </Border>
         <Border Grid.Row="1"  >

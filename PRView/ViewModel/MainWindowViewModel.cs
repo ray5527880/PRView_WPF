@@ -42,6 +42,16 @@ namespace PRView.ViewModel
         private void test_MessageBox_1()
         {
             Chart1Enable = true;
+            var _data = new List<double[]>();
+            for (int i = 0; i < 19200; i++)
+            {
+                var _datas = new double[3] 
+                {
+                    i,(Math.Sin(Math.PI * i / 180) * 50 + 100),i
+                };
+                _data.Add(_datas);
+            }
+            datas = _data;
             NumberOfGridX = 6;
             NumberOfGridY = 10;
             ViewMaxValueX = 10;
@@ -83,6 +93,7 @@ namespace PRView.ViewModel
         public double MainViewHeight { get; set; }
         public double MainViewWidth { get; set; }
 
+        public List<double[]> datas { get; set; }
 
         public double ViewMaxValueX { get; set; }
         public double ViewMinValueX { get; set; }
