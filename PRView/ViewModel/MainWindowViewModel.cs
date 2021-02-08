@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using PRView.Model;
 using PRView.UserControls;
+using System.Threading.Tasks;
 
 namespace PRView.ViewModel
 {
@@ -43,19 +44,23 @@ namespace PRView.ViewModel
         {
             Chart1Enable = true;
             var _data = new List<double[]>();
-            for (int i = 0; i < 19200; i++)
-            {
-                var _datas = new double[3] 
-                {
-                    i,(Math.Sin(Math.PI * i / 180) * 50 + 100),i
-                };
-                _data.Add(_datas);
-            }
-            datas = _data;
             NumberOfGridX = 6;
             NumberOfGridY = 10;
             ViewMaxValueX = 10;
             ViewMinValueX = -10;
+            Task.Run(() => {
+                for (int i = 0; i < 19200; i++)
+                {
+                    var _datas = new double[6]
+                    {
+                    i,/*(Math.Sin(Math.PI * i / 180) * 50 + 100)*/100,i,200,300,400
+                    };
+                    _data.Add(_datas);
+                }
+                datas = _data;
+            });
+           
+           
         }
         private void test_messagebox2()
         {
@@ -130,8 +135,8 @@ namespace PRView.ViewModel
         public ICommand btn_YZoomOut { get; }
         public ICommand btn_ReZoom { get; }
         public ICommand btn_OpenFile { get; }
-        public ICommand bnt_DowloadFile { get; }
-        public ICommand bnt_Setup { get; }
+        public ICommand btn_DowloadFile { get; }
+        public ICommand btn_Setup { get; }
         public ICommand btn_VS { get; }
         public ICommand btn_Screenshot { get; }
         public ICommand btn_ReomveBlack { get; }

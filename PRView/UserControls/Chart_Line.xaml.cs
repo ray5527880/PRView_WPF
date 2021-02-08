@@ -18,7 +18,57 @@ namespace PRView.UserControls
     /// </summary>
     public partial class Chart_Line : UserControl
     {
+        public double Scale_X { get; set; }
+        public static readonly DependencyProperty Scale_XProperty = DependencyProperty.Register(
+            nameof(Scale_X), typeof(double), typeof(Chart_Line),
+            new PropertyMetadata(default(double),OnScale_XChanged,CoerceScale_XValue));
+        private static void OnScale_XChanged(DependencyObject d,DependencyPropertyChangedEventArgs e)
+        {
+            var _data = d as Chart_Line;
+            ScaleTransform scaleTransform = new ScaleTransform();
+            scaleTransform.ScaleX = _data.Scale_X;
+            scaleTransform.ScaleY = _data.Scale_Y;
+            _data.MainChartCanvas.LayoutTransform = scaleTransform;
+        }
+        private static object CoerceScale_XValue(DependencyObject d,object baseValue)
+        {
+            return baseValue;
+        }
 
+        public double Scale_Y { get; set; }
+        public static readonly DependencyProperty Scale_YProperty = DependencyProperty.Register(
+            nameof(Scale_Y), typeof(double), typeof(Chart_Line), 
+            new PropertyMetadata(default(double),OnScale_YChanged,CoerceScale_YValue));
+        private static void OnScale_YChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _data = d as Chart_Line;
+            ScaleTransform scaleTransform = new ScaleTransform();
+            scaleTransform.ScaleX = _data.Scale_X;
+            scaleTransform.ScaleY = _data.Scale_Y;
+            _data.MainChartCanvas.LayoutTransform = scaleTransform;
+        }
+        private static object CoerceScale_YValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+
+
+        public int testInt { get; set; }
+        public static readonly DependencyProperty testIntProperty = DependencyProperty.Register(
+            nameof(testInt), typeof(int), typeof(Chart_Line), 
+            new PropertyMetadata(default(int), OntestIntChanged, CoercetestIntValue));
+        private static void OntestIntChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _data = d as Chart_Line;
+            //_data.MainChartCanvas.LayoutTransform=new Transform(ScaleTransform )
+            ScaleTransform scaleTransform = new ScaleTransform();
+            _data.MainChartCanvas.LayoutTransform = scaleTransform;
+
+        }
+        private static object CoercetestIntValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
 
         #region ChartDatas        
         public List<double[]> ChartDatas
@@ -257,10 +307,12 @@ namespace PRView.UserControls
                 }
             }
         }
+        
+
 
         private static void AddMainChart(Chart_Line chart_Lines, List<double[]> _ChartDatas)
         {
-            chart_Lines.MahtChartCanvas.Children.Clear();
+            chart_Lines.MainChartCanvas.Children.Clear();
             var _data = new string[_ChartDatas[0].Length - 1];
 
             for (int i = 0; i < _ChartDatas.Count; i++)
@@ -279,7 +331,7 @@ namespace PRView.UserControls
                 _path.Data = Geometry.Parse(_data[i]);
                 _path.Stroke=new SolidColorBrush(Colors.Black);
                 //_path.Stretch = Stretch.Uniform;
-                chart_Lines.MahtChartCanvas.Children.Add(_path);
+                chart_Lines.MainChartCanvas.Children.Add(_path);
             }
             
         }

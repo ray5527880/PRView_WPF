@@ -18,8 +18,18 @@ namespace PRView.UserControls
     /// </summary>
     public partial class MainChart : UserControl
     {
+
+        public int testInt { get; set; }
+        public static readonly DependencyProperty testIntProperty = DependencyProperty.Register(
+            nameof(testInt), typeof(int), typeof(MainChart), new PropertyMetadata());
+
         //public double ChartWidth { get; set; }
         //public double ChartHeight { get; set; }
+        private double scale_X { get; set; }
+
+       
+
+        private double scale_Y { get; set; }
 
 
         //private static void WidthChanged(MainChart mainChart)

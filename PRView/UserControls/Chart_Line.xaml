@@ -15,12 +15,15 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Border>
-        <Border>
-            <Grid x:Name="MahtChartCanvas" Background="#00000000">
-                
+        <Border >
+            
+            <Grid x:Name="MainChartCanvas" Background="#00000000" >
+
+                <Path Data="M 0 100 l 1000,0" Stroke="Black" />
+                <Grid.LayoutTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Grid.LayoutTransform>
             </Grid>
-
-
         </Border>
         <Border>
             <Grid x:Name="ViewTextBlock" Background="#00000000"/>
