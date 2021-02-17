@@ -54,141 +54,103 @@ namespace PRView.UserControls
         //    mainChart.ChartHeight = _height;
         //}
 
-        #region MainChartWidthAndHeight
-        public double MainChartWidth
-        {
-            get => (double)GetValue(MainChartWidthProperty);
-            set => SetValue(MainChartWidthProperty, value);
-        }
-        public static readonly DependencyProperty MainChartWidthProperty = DependencyProperty.Register(
-            nameof(MainChartWidth), typeof(double), typeof(MainChart),
-            new PropertyMetadata(default(double), OnMainChartWidthChanged, CoerceMainChartWidthValue));
-        private static void OnMainChartWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _data = d as MainChart;
-            //WidthChanged(_data);
-        }
-        private static object CoerceMainChartWidthValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-
-
-        public double MainChartHeight
-        {
-            get => (double)GetValue(MainChartHeightProperty);
-            set => SetValue(MainChartHeightProperty, value);
-        }
-        public static readonly DependencyProperty MainChartHeightProperty = DependencyProperty.Register(
-            nameof(MainChartHeight), typeof(double), typeof(MainChart), 
-            new PropertyMetadata(default(double), OnMainChartHeightChanged, CoerceMainChartHeightValue));
-        private static void OnMainChartHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _data = d as MainChart;
-            
-            //HeightChanged(_data);
-        }
-        private static object CoerceMainChartHeightValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-        #endregion
+       
       
-        #region Canvas1_Enable
-        public bool Canvas1_Enable
+        #region Chart1_Enable
+        public bool Chart1_Enable
         {
-            get => (bool)GetValue(Canvas1_EnableProperty);
-            set => SetValue(Canvas1_EnableProperty, value);
+            get => (bool)GetValue(Chart1_EnableProperty);
+            set => SetValue(Chart1_EnableProperty, value);
         }
-        public static readonly DependencyProperty Canvas1_EnableProperty = DependencyProperty.Register(
-            nameof(Canvas1_Enable), typeof(bool), typeof(MainChart),
-            new PropertyMetadata(default(bool), OnCanvas1_EnableChanged, CoerceCanvas1_EnableValue));
-        private static void OnCanvas1_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty Chart1_EnableProperty = DependencyProperty.Register(
+            nameof(Chart1_Enable), typeof(bool), typeof(MainChart),
+            new PropertyMetadata(default(bool), OnChart1_EnableChanged, CoerceChart1_EnableValue));
+        private static void OnChart1_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_1.Height = _data.Canvas1_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel); 
+            _data.Canvas_1.Height = _data.Chart1_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel); 
         }
-        private static object CoerceCanvas1_EnableValue(DependencyObject d, object baseValue)
+        private static object CoerceChart1_EnableValue(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
         #endregion
 
-        #region Canvas2_Enable
-        public bool Canvas2_Enable
+        #region Chart2_Enable
+        public bool Chart2_Enable
         {
-            get => (bool)GetValue(Canvas2_EnableProperty);
-            set => SetValue(Canvas2_EnableProperty, value);
+            get => (bool)GetValue(Chart2_EnableProperty);
+            set => SetValue(Chart2_EnableProperty, value);
         }
-        public static readonly DependencyProperty Canvas2_EnableProperty = DependencyProperty.Register(
-            nameof(Canvas2_Enable), typeof(bool), typeof(MainChart),
-            new PropertyMetadata(default(bool), OnCanvas2_EnableChanged, CoerceCanvas2_EnableValue));
-        private static void OnCanvas2_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty Chart2_EnableProperty = DependencyProperty.Register(
+            nameof(Chart2_Enable), typeof(bool), typeof(MainChart),
+            new PropertyMetadata(default(bool), OnChart2_EnableChanged, CoerceChart2_EnableValue));
+        private static void OnChart2_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_2.Height = _data.Canvas2_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
+            _data.Canvas_2.Height = _data.Chart2_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
-        private static object CoerceCanvas2_EnableValue(DependencyObject d, object baseValue)
+        private static object CoerceChart2_EnableValue(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
         #endregion
 
-        #region Canvas3_Enable
-        public bool Canvas3_Enable
+        #region Chart3_Enable
+        public bool Chart3_Enable
         {
-            get => (bool)GetValue(Canvas3_EnableProperty);
-            set => SetValue(Canvas3_EnableProperty, value);
+            get => (bool)GetValue(Chart3_EnableProperty);
+            set => SetValue(Chart3_EnableProperty, value);
         }
-        public static readonly DependencyProperty Canvas3_EnableProperty = DependencyProperty.Register(
-            nameof(Canvas3_Enable), typeof(bool), typeof(MainChart),
-            new PropertyMetadata(default(bool), OnCanvas3_EnableChanged, CoerceCanvas3_EnableValue));
-        private static void OnCanvas3_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty Chart3_EnableProperty = DependencyProperty.Register(
+            nameof(Chart3_Enable), typeof(bool), typeof(MainChart),
+            new PropertyMetadata(default(bool), OnChart3_EnableChanged, CoerceChart3_EnableValue));
+        private static void OnChart3_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_3.Height = _data.Canvas3_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
+            _data.Canvas_3.Height = _data.Chart3_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
-        private static object CoerceCanvas3_EnableValue(DependencyObject d, object baseValue)
+        private static object CoerceChart3_EnableValue(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
         #endregion
 
         #region Canvas4_Enable
-        public bool Canvas4_Enable
+        public bool Chart4_Enable
         {
-            get => (bool)GetValue(Canvas4_EnableProperty);
-            set => SetValue(Canvas4_EnableProperty, value);
+            get => (bool)GetValue(Chart4_EnableProperty);
+            set => SetValue(Chart4_EnableProperty, value);
         }
-        public static readonly DependencyProperty Canvas4_EnableProperty = DependencyProperty.Register(
-            nameof(Canvas4_Enable), typeof(bool), typeof(MainChart),
-            new PropertyMetadata(default(bool), OnCanvas4_EnableChanged, CoerceCanvas4_EnableValue));
-        private static void OnCanvas4_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty Chart4_EnableProperty = DependencyProperty.Register(
+            nameof(Chart4_Enable), typeof(bool), typeof(MainChart),
+            new PropertyMetadata(default(bool), OnChart4_EnableChanged, CoerceChart4_EnableValue));
+        private static void OnChart4_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_4.Height = _data.Canvas4_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
+            _data.Canvas_4.Height = _data.Chart4_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
-        private static object CoerceCanvas4_EnableValue(DependencyObject d, object baseValue)
+        private static object CoerceChart4_EnableValue(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
         #endregion
 
-        #region Canvas5_Enable
-        public bool Canvas5_Enable
+        #region Chart5_Enable
+        public bool Chart5_Enable
         {
-            get => (bool)GetValue(Canvas5_EnableProperty);
-            set => SetValue(Canvas5_EnableProperty, value);
+            get => (bool)GetValue(Chart5_EnableProperty);
+            set => SetValue(Chart5_EnableProperty, value);
         }
-        public static readonly DependencyProperty Canvas5_EnableProperty = DependencyProperty.Register(
-            nameof(Canvas5_Enable), typeof(bool), typeof(MainChart),
-            new PropertyMetadata(default(bool), OnCanvas5_EnableChanged, CoerceCanvas5_EnableValue));
-        private static void OnCanvas5_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty Chart5_EnableProperty = DependencyProperty.Register(
+            nameof(Chart5_Enable), typeof(bool), typeof(MainChart),
+            new PropertyMetadata(default(bool), OnChart5_EnableChanged, CoerceChart5_EnableValue));
+        private static void OnChart5_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_5.Height = _data.Canvas5_Enable ? new GridLength(120, GridUnitType.Pixel) : new GridLength(0, GridUnitType.Pixel);
+            _data.Canvas_5.Height = _data.Chart5_Enable ? new GridLength(120, GridUnitType.Pixel) : new GridLength(0, GridUnitType.Pixel);
         }
-        private static object CoerceCanvas5_EnableValue(DependencyObject d, object baseValue)
+        private static object CoerceChart5_EnableValue(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
@@ -321,11 +283,44 @@ namespace PRView.UserControls
         }
         #endregion
 
+        public double ScrollBarValue
+        {
+            get => (double)GetValue(ScrollBarValueProperty);
+            set => SetValue(ScrollBarValueProperty, value);
+        }
+        public static readonly DependencyProperty ScrollBarValueProperty = DependencyProperty.Register(
+        nameof(ScrollBarValue), typeof(double), typeof(MainChart),
+        new PropertyMetadata(default(double), OnScrollBarValueChanged, CoerceScrollBarValueValue));
+        private static void OnScrollBarValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
 
+        }
+        private static object CoerceScrollBarValueValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
         public MainChart()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
+
+        public double MaxValueX 
+        {
+            get => (double)GetValue(MaxValueXProperty);
+            set => SetValue(MaxValueXProperty, value);
+        }
+        public static readonly DependencyProperty MaxValueXProperty = DependencyProperty.Register(
+          nameof(MaxValueX), typeof(double), typeof(MainChart),
+          new PropertyMetadata(default(double), OnMaxValueXChanged, CoerceMaxValueXValue));
+        private static void OnMaxValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+        private static object CoerceMaxValueXValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+ 
 
     }
 }

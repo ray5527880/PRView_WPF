@@ -22,60 +22,70 @@ namespace PRView.ViewModel
         public MainWindowViewModel()
         {
             _MainWindowData = new MainWindowData();
-             btn_ReZoom = new RelayCommand<object>(() => test_messagebox());
+            btn_ReZoom = new RelayCommand<object>(() => test_messagebox());
             btn_XZoomIn = new RelayCommand<object>(() => test_MessageBox_1());
             btn_OpenFile = new RelayCommand<object>(() => OpenFile());
             btn_XZoomOut = new RelayCommand<object>(() => test_messagebox2());
+            btn_YZoomIn = new RelayCommand<object>(() => test_ZoomIn());
+            btn_YZoomOut = new RelayCommand<object>(() => test_ZoomOut());
             //WindowsSizeChanged = new RelayCommand<object>(() => _WindowsSizeChanged());
 
         }
         private void test_messagebox()
-        {            
+        {
             Locastion = "123";
             Chart1Enable = false;
             Chart2Enable = false;
             Chart3Enable = false;
             Chart4Enable = false;
             Chart5Enable = false;
-           
+
             AnalogBlockName = new string[] { "qwe" };
         }
         private void test_MessageBox_1()
         {
+            ChartMaxValueX = 5000;
+            ChartMinValueX = 0;
+
             Chart1Enable = true;
             var _data = new List<double[]>();
             NumberOfGridX = 6;
             NumberOfGridY = 10;
             ViewMaxValueX = 10;
             ViewMinValueX = -10;
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 for (int i = 0; i < 19200; i++)
                 {
                     var _datas = new double[6]
                     {
-                    i,/*(Math.Sin(Math.PI * i / 180) * 50 + 100)*/100,i,200,300,400
+                    i,/*(Math.Sin(Math.PI * i / 180) * 50 + 100)*/100,i+250,200,300,400
                     };
                     _data.Add(_datas);
                 }
                 datas = _data;
             });
-           
-           
         }
         private void test_messagebox2()
         {
             Chart2Enable = true;
         }
-       
+        private void test_ZoomIn()
+        {
 
+        }
+        private void test_ZoomOut()
+        {
+
+        }
         private void OpenFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "DR-files(*.zip;*.cfg)|*.zip;*.cfg";
             if (openFileDialog.ShowDialog() == true)
                 System.Windows.MessageBox.Show(openFileDialog.SafeFileName);
-                
-                //txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
+
+            //txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
         }
 
         #region General Information
@@ -87,10 +97,12 @@ namespace PRView.ViewModel
         public string TriggerTime { set { _TriggerTime = "觸發時間：" + value; } get { return _TriggerTime; } }
         #endregion
 
+        public double ScrollBarValue { get; set; }
+
         #region ButtonBlock
 
         public string[] AnalogBlockName { get; set; }
-        public string [] DigitalBlockName { get; set; }
+        public string[] DigitalBlockName { get; set; }
 
         #endregion
 
@@ -99,6 +111,9 @@ namespace PRView.ViewModel
         public double MainViewWidth { get; set; }
 
         public List<double[]> datas { get; set; }
+
+        public double ChartMaxValueX { get; set; }
+        public double ChartMinValueX { get; set; }
 
         public double ViewMaxValueX { get; set; }
         public double ViewMinValueX { get; set; }
@@ -116,7 +131,7 @@ namespace PRView.ViewModel
 
         #endregion
         #region MainView Controls
-        
+
         #endregion
 
         public bool btn_Enabled { set; get; } = true;

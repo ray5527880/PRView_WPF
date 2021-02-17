@@ -16,19 +16,17 @@
             </Grid>
         </Border>
         <Border >
-            
-            <Grid x:Name="MainChartCanvas" Background="#00000000" >
-
-                <Path Data="M 0 100 l 1000,0" Stroke="Black" />
+            <Grid x:Name="MainChartGrid" Background="#00000000" >
                 <Grid.LayoutTransform>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    <ScaleTransform x:Name="GridScale"/>
                 </Grid.LayoutTransform>
             </Grid>
         </Border>
         <Border>
             <Grid x:Name="ViewTextBlock" Background="#00000000"/>
-            
-
         </Border>
+        <Border Panel.ZIndex="1" VerticalAlignment="Bottom" Height="30" Background="White"/>
+        <Border Panel.ZIndex="1" VerticalAlignment="Stretch" Width="69" Background="White" HorizontalAlignment="Left"/>
+        <Border Panel.ZIndex="1" VerticalAlignment="Top" Height="49" Background="White"/>
     </Grid>
 </UserControl>

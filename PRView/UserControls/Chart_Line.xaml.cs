@@ -18,52 +18,22 @@ namespace PRView.UserControls
     /// </summary>
     public partial class Chart_Line : UserControl
     {
-        public double Scale_X { get; set; }
-        public static readonly DependencyProperty Scale_XProperty = DependencyProperty.Register(
-            nameof(Scale_X), typeof(double), typeof(Chart_Line),
-            new PropertyMetadata(default(double),OnScale_XChanged,CoerceScale_XValue));
-        private static void OnScale_XChanged(DependencyObject d,DependencyPropertyChangedEventArgs e)
-        {
-            var _data = d as Chart_Line;
-            ScaleTransform scaleTransform = new ScaleTransform();
-            scaleTransform.ScaleX = _data.Scale_X;
-            scaleTransform.ScaleY = _data.Scale_Y;
-            _data.MainChartCanvas.LayoutTransform = scaleTransform;
-        }
-        private static object CoerceScale_XValue(DependencyObject d,object baseValue)
-        {
-            return baseValue;
-        }
 
-        public double Scale_Y { get; set; }
-        public static readonly DependencyProperty Scale_YProperty = DependencyProperty.Register(
-            nameof(Scale_Y), typeof(double), typeof(Chart_Line), 
-            new PropertyMetadata(default(double),OnScale_YChanged,CoerceScale_YValue));
-        private static void OnScale_YChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _data = d as Chart_Line;
-            ScaleTransform scaleTransform = new ScaleTransform();
-            scaleTransform.ScaleX = _data.Scale_X;
-            scaleTransform.ScaleY = _data.Scale_Y;
-            _data.MainChartCanvas.LayoutTransform = scaleTransform;
-        }
-        private static object CoerceScale_YValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
 
+
+        private double Scale_X = 1;
+        private double Scale_Y = 1;
 
         public int testInt { get; set; }
         public static readonly DependencyProperty testIntProperty = DependencyProperty.Register(
-            nameof(testInt), typeof(int), typeof(Chart_Line), 
+            nameof(testInt), typeof(int), typeof(Chart_Line),
             new PropertyMetadata(default(int), OntestIntChanged, CoercetestIntValue));
         private static void OntestIntChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as Chart_Line;
             //_data.MainChartCanvas.LayoutTransform=new Transform(ScaleTransform )
             ScaleTransform scaleTransform = new ScaleTransform();
-            _data.MainChartCanvas.LayoutTransform = scaleTransform;
-
+            _data.MainChartGrid.LayoutTransform = scaleTransform;
         }
         private static object CoercetestIntValue(DependencyObject d, object baseValue)
         {
@@ -88,6 +58,10 @@ namespace PRView.UserControls
         {
             return baseValue;
         }
+        #endregion
+
+        #region 
+        public double ChartMaxValue { get; set; }
         #endregion
 
         #region ViewMaxValueX
@@ -241,8 +215,23 @@ namespace PRView.UserControls
             nameof(IsViewVisible), typeof(bool), typeof(Chart_Line), new PropertyMetadata());
 
         #endregion
-        public double MaxValueX;
-        public double MinValueX;
+        public double MaxValueX
+        {
+            get => (double)GetValue(MaxValueXProperty);
+            set => SetValue(MaxValueXProperty, value);
+        }
+        public static readonly DependencyProperty MaxValueXProperty = DependencyProperty.Register(
+       nameof(MaxValueX), typeof(double), typeof(Chart_Line),
+       new PropertyMetadata(default(double), OnMaxValueXChanged, CoerceMaxValueXFileValue));
+        private static void OnMaxValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _data = d as Chart_Line;
+            _data.MaxValueX = 60 * 1000;
+        }
+        private static object CoerceMaxValueXFileValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
         public double MaxValueY;
         public double MinValueY;
 
@@ -250,6 +239,12 @@ namespace PRView.UserControls
         {
             InitializeComponent();
         }
+        private static void SetGridScale(Chart_Line chart_Line)
+        {
+            chart_Line.Scale_X /= 2;
+            chart_Line.Scale_Y /= 2;
+        }
+
 
         private static void GridBlock(Chart_Line chart_Line, int _NumberOfGridX, int _NumberOfGridY)
         {
@@ -307,33 +302,32 @@ namespace PRView.UserControls
                 }
             }
         }
-        
+
 
 
         private static void AddMainChart(Chart_Line chart_Lines, List<double[]> _ChartDatas)
         {
-            chart_Lines.MainChartCanvas.Children.Clear();
+            chart_Lines.MainChartGrid.Children.Clear();
             var _data = new string[_ChartDatas[0].Length - 1];
 
             for (int i = 0; i < _ChartDatas.Count; i++)
             {
-                for (int j = 0; j < _ChartDatas[i].Length-1; j++)
+                for (int j = 0; j < _ChartDatas[i].Length - 1; j++)
                 {
                     if (i == 0)
-                        _data[j] += string.Format("M {0},{1}", 0, _ChartDatas[i][j +1]);
+                        _data[j] += string.Format("M {0},{1}", 0, _ChartDatas[i][j + 1]);
                     else
-                        _data[j] += string.Format(" {0},{1}", _ChartDatas[i][0], _ChartDatas[i][j +1]);
+                        _data[j] += string.Format(" {0},{1}", _ChartDatas[i][0], _ChartDatas[i][j + 1]);
                 }
             }
             for (int i = 0; i < _ChartDatas[0].Length - 1; i++)
             {
                 var _path = new Path();
                 _path.Data = Geometry.Parse(_data[i]);
-                _path.Stroke=new SolidColorBrush(Colors.Black);
+                _path.Stroke = new SolidColorBrush(Colors.Black);
                 //_path.Stretch = Stretch.Uniform;
-                chart_Lines.MainChartCanvas.Children.Add(_path);
+                chart_Lines.MainChartGrid.Children.Add(_path);
             }
-            
         }
         private static void TextBlock()
         {
