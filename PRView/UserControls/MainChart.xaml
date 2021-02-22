@@ -15,7 +15,7 @@
             <RowDefinition Height="0" x:Name="Canvas_5"/>
             <RowDefinition Height="20" x:Name="SBar"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0">
+        <Border Grid.Row="0" >
 
             <local:Chart_Line ViewMaxValueX="{Binding ViewMaxValueX}"
                               ViewMaxValueY="{Binding ViewMaxValueY}"

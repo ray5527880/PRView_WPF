@@ -283,6 +283,8 @@ namespace PRView.UserControls
         }
         #endregion
 
+        
+        
         public double ScrollBarValue
         {
             get => (double)GetValue(ScrollBarValueProperty);
