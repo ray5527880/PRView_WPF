@@ -18,6 +18,9 @@ namespace PRView.UserControls
     /// </summary>
     public partial class MainChart : UserControl
     {
+        public double PointY_1 { get; set; }
+        public double PointX { get; set; }
+
 
         public int testInt { get; set; }
         public static readonly DependencyProperty testIntProperty = DependencyProperty.Register(
@@ -32,30 +35,6 @@ namespace PRView.UserControls
         private double scale_Y { get; set; }
 
 
-        //private static void WidthChanged(MainChart mainChart)
-        //{
-        //    mainChart.ChartWidth = mainChart.MainChartWidth-120;
-        //}
-        //private static void HeightChanged(MainChart mainChart)
-        //{
-        //    var _height = mainChart.MainChartHeight - 120;
-        //    if (mainChart.Canvas5_Enable)
-        //        _height -= 120;
-        //    int EnableCount = 0;
-        //    if (mainChart.Canvas1_Enable)
-        //        EnableCount++;
-        //    if (mainChart.Canvas2_Enable)
-        //        EnableCount++;
-        //    if (mainChart.Canvas3_Enable)
-        //        EnableCount++;
-        //    if (mainChart.Canvas4_Enable)
-        //        EnableCount++;
-            
-        //    mainChart.ChartHeight = _height;
-        //}
-
-       
-      
         #region Chart1_Enable
         public bool Chart1_Enable
         {
@@ -322,7 +301,19 @@ namespace PRView.UserControls
         {
             return baseValue;
         }
- 
 
+        private void Border_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                this.PointY_1 += 10;
+                PointX += 10;
+            }
+            else if (e.Delta < 0)
+            {
+                this.PointY_1 -= 10;
+                PointX -= 10;
+            }
+        }
     }
 }

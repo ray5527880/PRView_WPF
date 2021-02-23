@@ -18,9 +18,49 @@ namespace PRView.UserControls
     /// </summary>
     public partial class Chart_Line : UserControl
     {
+        #region PointX
+        public double PointX
+        {
+            get => (double)GetValue(PointXProperty);
+            set => SetValue(PointXProperty, value);
+        }
+        public static readonly DependencyProperty PointXProperty = DependencyProperty.Register(
+            nameof(PointX), typeof(double), typeof(Chart_Line),
+            new PropertyMetadata(default(double), OnPointXChanged, CoercePointXValue));
+        private static void OnPointXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _View = d as Chart_Line;
 
+            var _Margin = _View.MainChartGrid.Margin;
+            _View.MainChartGrid.Margin = new Thickness(_View.PointX, _Margin.Top, _Margin.Right, _Margin.Bottom);
+        }
+        private static object CoercePointXValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
 
+        #region PointY
+        public double PointY
+        {
+            get => (double)GetValue(PointYProperty);
+            set => SetValue(PointYProperty, value);
+        }
+        public static readonly DependencyProperty PointYProperty = DependencyProperty.Register(
+            nameof(PointY), typeof(double), typeof(Chart_Line),
+            new PropertyMetadata(default(double), OnPointYChanged, CoercePointYValue));
+        private static void OnPointYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _View = d as Chart_Line;
 
+            var _Margin = _View.MainChartGrid.Margin;
+            _View.MainChartGrid.Margin = new Thickness( _Margin.Left,_View.PointY, _Margin.Right, _Margin.Bottom);
+        }
+        private static object CoercePointYValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        #endregion
         private double Scale_X = 1;
         private double Scale_Y = 1;
 

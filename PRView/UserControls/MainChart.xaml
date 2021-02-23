@@ -15,7 +15,7 @@
             <RowDefinition Height="0" x:Name="Canvas_5"/>
             <RowDefinition Height="20" x:Name="SBar"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" >
+        <Border Grid.Row="0"  MouseWheel="Border_MouseWheel">
 
             <local:Chart_Line ViewMaxValueX="{Binding ViewMaxValueX}"
                               ViewMaxValueY="{Binding ViewMaxValueY}"
@@ -27,6 +27,8 @@
                               ChartDatas="{Binding Chart_Line_Data_1}"
                               testInt="{Binding testInt}"
                               MaxValueX="{Binding MaxValueX}"
+                              PointX="{Binding PointX, Mode=OneWay}"
+                              PointY="{Binding PointY_1, Mode=OneWay}"
                               >
                 
             </local:Chart_Line>
