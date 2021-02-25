@@ -216,12 +216,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
-                        <UserControls:MainChart 
-                                                ViewMaxValueX="{Binding ViewMaxValueX}"
-                                                ViewMinValueX="{Binding ViewMinValueX}"
-                                                ViewMaxValueY="{Binding ViewMaxValueY}"
-                                                ViewMinValueY="{Binding ViewMinValueY}"
-                                                NumberOfGridX="{Binding NumberOfGridX}"
+                        <UserControls:MainChart NumberOfGridX="{Binding NumberOfGridX}"
                                                 NumberOfGridY="{Binding NumberOfGridY}"
                                                 Chart1_Enable="{Binding Chart1Enable}"
                                                 Chart2_Enable="{Binding Chart2Enable}"
@@ -231,7 +226,7 @@
                                                 ScrollBarValue="{Binding ScrollBarValue}"
                                                 Chart_Line_Data_1="{Binding datas}" Grid.ColumnSpan="2" Margin="0,0,0,20" Grid.RowSpan="2"
                                                 
-                                                />
+                                                 />
                         <ScrollBar  Minimum="0" Maximum="{Binding ChartMaxValueX}" Value="{Binding ScrollBarValue}"  Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,1,0,2"/>
                     </Grid>
                 </Border>

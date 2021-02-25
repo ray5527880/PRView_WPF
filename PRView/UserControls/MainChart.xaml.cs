@@ -18,22 +18,45 @@ namespace PRView.UserControls
     /// </summary>
     public partial class MainChart : UserControl
     {
-        public double PointY_1 { get; set; }
-        public double PointX { get; set; }
+        public double AxisYMaxValue_1
+        {
+            get => (double)GetValue(AxisYMaxValue_1Property);
+            set => SetValue(AxisYMaxValue_1Property, value);
+        }
+        public static readonly DependencyProperty AxisYMaxValue_1Property = DependencyProperty.Register(
+          nameof(AxisYMaxValue_1), typeof(double), typeof(MainChart), new PropertyMetadata());
+        public double AxisYMinValue_1
+        {
+            get => (double)GetValue(AxisYMinValue_1Property);
+            set => SetValue(AxisYMinValue_1Property, value);
+        }
+        public static readonly DependencyProperty AxisYMinValue_1Property = DependencyProperty.Register(
+          nameof(AxisYMinValue_1), typeof(double), typeof(MainChart), new PropertyMetadata());
 
+        public double AxisXMaxValue
+        {
+            get => (double)GetValue(AxisXMaxValueProperty);
+            set => SetValue(AxisXMaxValueProperty, value);
+        }
+        public static readonly DependencyProperty AxisXMaxValueProperty = DependencyProperty.Register(
+            nameof(AxisXMaxValue), typeof(double), typeof(MainChart), new PropertyMetadata());
+
+        public double AxisXMinValue
+        {
+            get => (double)GetValue(AxisXMinValueProperty);
+            set => SetValue(AxisXMinValueProperty, value);
+        }
+        public static readonly DependencyProperty AxisXMinValueProperty = DependencyProperty.Register(
+           nameof(AxisXMinValue), typeof(double), typeof(MainChart), new PropertyMetadata());
+       
 
         public int testInt { get; set; }
         public static readonly DependencyProperty testIntProperty = DependencyProperty.Register(
             nameof(testInt), typeof(int), typeof(MainChart), new PropertyMetadata());
 
-        //public double ChartWidth { get; set; }
-        //public double ChartHeight { get; set; }
         private double scale_X { get; set; }
 
-       
-
         private double scale_Y { get; set; }
-
 
         #region Chart1_Enable
         public bool Chart1_Enable
@@ -95,7 +118,7 @@ namespace PRView.UserControls
         }
         #endregion
 
-        #region Canvas4_Enable
+        #region Chart4_Enable
         public bool Chart4_Enable
         {
             get => (bool)GetValue(Chart4_EnableProperty);
@@ -135,7 +158,7 @@ namespace PRView.UserControls
         }
         #endregion
 
-        #region Chart_Line_1
+        #region Chart_Line_Data
 
         public List<double[]> Chart_Line_Data_1
         {
@@ -148,81 +171,7 @@ namespace PRView.UserControls
 
         #endregion
 
-        #region ViewMaxValueX
-        public int ViewMaxValueX
-        {
-            get => (int)GetValue(ViewMaxValueXProperty);
-            set => SetValue(ViewMaxValueXProperty, value);
-        }
-        public static readonly DependencyProperty ViewMaxValueXProperty = DependencyProperty.Register(
-            nameof(ViewMaxValueX), typeof(int), typeof(MainChart),
-            new PropertyMetadata(default(int), OnViewMaxValueXChanged, CoerceViewMaxValueXValue));
-        private static void OnViewMaxValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-        private static object CoerceViewMaxValueXValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-        #endregion
-
-        #region ViewMinValueX
-        public int ViewMinValueX
-        {
-            get => (int)GetValue(ViewMinValueXProperty);
-            set => SetValue(ViewMinValueXProperty, value);
-        }
-        public static readonly DependencyProperty ViewMinValueXProperty = DependencyProperty.Register(
-            nameof(ViewMinValueX), typeof(int), typeof(MainChart),
-            new PropertyMetadata(default(int), OnViewMinValueXChanged, CoerceViewMinValueXValue));
-        private static void OnViewMinValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-        private static object CoerceViewMinValueXValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-        #endregion
-
-        #region ViewMaxValueY
-        public int ViewMaxValueY
-        {
-            get => (int)GetValue(ViewMaxValueYProperty);
-            set => SetValue(ViewMaxValueYProperty, value);
-        }
-        public static readonly DependencyProperty ViewMaxValueYProperty = DependencyProperty.Register(
-            nameof(ViewMaxValueY), typeof(int), typeof(MainChart),
-            new PropertyMetadata(default(int), OnViewMaxValueYChanged, CoerceViewMaxValueYValue));
-        private static void OnViewMaxValueYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-        private static object CoerceViewMaxValueYValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-        #endregion
-
-        #region ViewMinValueY
-        public int ViewMinValueY
-        {
-            get => (int)GetValue(ViewMinValueYProperty);
-            set => SetValue(ViewMinValueYProperty, value);
-        }
-        public static readonly DependencyProperty ViewMinValueYProperty = DependencyProperty.Register(
-           nameof(ViewMinValueY), typeof(int), typeof(MainChart),
-           new PropertyMetadata(default(int), OnViewMinValueYChanged, CoerceViewMinValueYValue));
-        private static void OnViewMinValueYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-        private static object CoerceViewMinValueYValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-        #endregion
+       
 
         #region NumberOfGridX
         public int NumberOfGridX
@@ -306,13 +255,13 @@ namespace PRView.UserControls
         {
             if (e.Delta > 0)
             {
-                this.PointY_1 += 10;
-                PointX += 10;
+                this.AxisYMaxValue_1 += 10;
+                
             }
             else if (e.Delta < 0)
             {
-                this.PointY_1 -= 10;
-                PointX -= 10;
+                this.AxisYMinValue_1 -= 10;
+                
             }
         }
     }

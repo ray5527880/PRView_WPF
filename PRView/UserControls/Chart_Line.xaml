@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PRView.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid >
+    <Grid SizeChanged="Grid_SizeChanged"    >
         <Border >
             <Grid x:Name="ViewGridBlock" Background="White" OpacityMask="Black"  >
                 <Grid.ColumnDefinitions>

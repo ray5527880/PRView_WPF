@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRView", "PRView\PRView.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FW_Setup", "..\..\PRSpline\FW_Setup\FW_Setup.csproj", "{DF8C07DC-0686-4D91-A6C3-6014D25A2D16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFChart", "BFChart\BFChart.csproj", "{93FBCE52-1B2A-4E77-A167-DDE3EFDB83D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DF8C07DC-0686-4D91-A6C3-6014D25A2D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF8C07DC-0686-4D91-A6C3-6014D25A2D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF8C07DC-0686-4D91-A6C3-6014D25A2D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93FBCE52-1B2A-4E77-A167-DDE3EFDB83D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93FBCE52-1B2A-4E77-A167-DDE3EFDB83D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93FBCE52-1B2A-4E77-A167-DDE3EFDB83D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93FBCE52-1B2A-4E77-A167-DDE3EFDB83D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

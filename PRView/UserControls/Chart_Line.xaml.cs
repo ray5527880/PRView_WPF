@@ -18,49 +18,83 @@ namespace PRView.UserControls
     /// </summary>
     public partial class Chart_Line : UserControl
     {
-        #region PointX
-        public double PointX
+        private double _Width;
+        private double _Height;
+
+
+
+        public double AxisY_MaxValue
         {
-            get => (double)GetValue(PointXProperty);
-            set => SetValue(PointXProperty, value);
+            get => (double)GetValue(AxisY_MaxValueProperty);
+            set => SetValue(AxisY_MaxValueProperty, value);
         }
-        public static readonly DependencyProperty PointXProperty = DependencyProperty.Register(
-            nameof(PointX), typeof(double), typeof(Chart_Line),
-            new PropertyMetadata(default(double), OnPointXChanged, CoercePointXValue));
-        private static void OnPointXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty AxisY_MaxValueProperty = DependencyProperty.Register(
+            nameof(AxisY_MaxValue), typeof(double), typeof(Chart_Line),
+            new PropertyMetadata(default(double),UpdataView()));
+        //new PropertyMetadata(default(double), OnAxisY_MaxValueChanged, CoerceAxisY_MaxValueValue));
+        private static void OnAxisY_MaxValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _View = d as Chart_Line;
-
-            var _Margin = _View.MainChartGrid.Margin;
-            _View.MainChartGrid.Margin = new Thickness(_View.PointX, _Margin.Top, _Margin.Right, _Margin.Bottom);
+            UpdataView(_View);
         }
-        private static object CoercePointXValue(DependencyObject d, object baseValue)
+        private static object CoerceAxisY_MaxValueValue(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
-        #endregion
-
-        #region PointY
-        public double PointY
+        public double AxisY_MinValue
         {
-            get => (double)GetValue(PointYProperty);
-            set => SetValue(PointYProperty, value);
+            get => (double)GetValue(AxisY_MinValueProperty);
+            set => SetValue(AxisY_MinValueProperty, value);
         }
-        public static readonly DependencyProperty PointYProperty = DependencyProperty.Register(
-            nameof(PointY), typeof(double), typeof(Chart_Line),
-            new PropertyMetadata(default(double), OnPointYChanged, CoercePointYValue));
-        private static void OnPointYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty AxisY_MinValueProperty = DependencyProperty.Register(
+            nameof(AxisY_MinValue), typeof(double), typeof(Chart_Line),
+            new PropertyMetadata(default(double), OnAxisY_MinValueChanged, CoerceAxisY_MinValueValue));
+        private static void OnAxisY_MinValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _View = d as Chart_Line;
-
-            var _Margin = _View.MainChartGrid.Margin;
-            _View.MainChartGrid.Margin = new Thickness( _Margin.Left,_View.PointY, _Margin.Right, _Margin.Bottom);
+            UpdataView(_View);
         }
-        private static object CoercePointYValue(DependencyObject d, object baseValue)
+        private static object CoerceAxisY_MinValueValue(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
-        #endregion
+
+        public double AxisX_MaxValue
+        {
+            get => (double)GetValue(AxisX_MaxValueProperty);
+            set => SetValue(AxisX_MaxValueProperty, value);
+        }
+        public static readonly DependencyProperty AxisX_MaxValueProperty = DependencyProperty.Register(
+            nameof(AxisX_MaxValue), typeof(double), typeof(Chart_Line),
+            new PropertyMetadata(default(double), OnAxisX_MaxValueChanged, CoerceAxisX_MaxValueValue));
+        private static void OnAxisX_MaxValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _View = d as Chart_Line;
+            UpdataView(_View);
+        }
+        private static object CoerceAxisX_MaxValueValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+        public double AxisX_MinValue
+        {
+            get => (double)GetValue(AxisX_MinValueProperty);
+            set => SetValue(AxisX_MinValueProperty, value);
+        }
+        public static readonly DependencyProperty AxisX_MinValueProperty = DependencyProperty.Register(
+            nameof(AxisX_MinValue), typeof(double), typeof(Chart_Line),
+            new PropertyMetadata(default(double), OnAxisX_MinValueChanged, CoerceAxisX_MinValueValue));
+        private static void OnAxisX_MinValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var _View = d as Chart_Line;
+            UpdataView(_View);
+        }
+        private static object CoerceAxisX_MinValueValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+       
+        
         private double Scale_X = 1;
         private double Scale_Y = 1;
 
@@ -102,86 +136,6 @@ namespace PRView.UserControls
 
         #region 
         public double ChartMaxValue { get; set; }
-        #endregion
-
-        #region ViewMaxValueX
-        public int ViewMaxValueX
-        {
-            get => (int)GetValue(ViewMaxValueXProperty);
-            set => SetValue(ViewMaxValueXProperty, value);
-        }
-        public static readonly DependencyProperty ViewMaxValueXProperty = DependencyProperty.Register(
-            nameof(ViewMaxValueX), typeof(int), typeof(Chart_Line),
-            new PropertyMetadata(default(int), OnViewMaxValueXChanged, CoerceViewMaxValueXValue));
-        private static void OnViewMaxValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _View = d as Chart_Line;
-            //GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
-        }
-        private static object CoerceViewMaxValueXValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-        #endregion
-
-        #region ViewMinValueX
-        public int ViewMinValueX
-        {
-            get => (int)GetValue(ViewMinValueXProperty);
-            set => SetValue(ViewMinValueXProperty, value);
-        }
-        public static readonly DependencyProperty ViewMinValueXProperty = DependencyProperty.Register(
-            nameof(ViewMinValueX), typeof(int), typeof(Chart_Line),
-            new PropertyMetadata(default(int), OnViewMinValueXChanged, CoerceViewMinValueXValue));
-        private static void OnViewMinValueXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _View = d as Chart_Line;
-            //GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
-        }
-        private static object CoerceViewMinValueXValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-        #endregion
-
-        #region ViewMaxValueY
-        public int ViewMaxValueY
-        {
-            get => (int)GetValue(ViewMaxValueYProperty);
-            set => SetValue(ViewMaxValueYProperty, value);
-        }
-        public static readonly DependencyProperty ViewMaxValueYProperty = DependencyProperty.Register(
-            nameof(ViewMaxValueY), typeof(int), typeof(Chart_Line),
-            new PropertyMetadata(default(int), OnViewMaxValueYChanged, CoerceViewMaxValueYValue));
-        private static void OnViewMaxValueYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _View = d as Chart_Line;
-            //GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
-        }
-        private static object CoerceViewMaxValueYValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-        #endregion
-
-        #region ViewMinValueY
-        public int ViewMinValueY
-        {
-            get => (int)GetValue(ViewMinValueYProperty);
-            set => SetValue(ViewMinValueYProperty, value);
-        }
-        public static readonly DependencyProperty ViewMinValueYProperty = DependencyProperty.Register(
-           nameof(ViewMinValueY), typeof(int), typeof(Chart_Line),
-           new PropertyMetadata(default(int), OnViewMinValueYChanged, CoerceViewMinValueYValue));
-        private static void OnViewMinValueYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _View = d as Chart_Line;
-            //GridBlock(_View, _View.NumberOfGridX, _View.NumberOfGridY);
-        }
-        private static object CoerceViewMinValueYValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
         #endregion
 
         #region NumberOfGridX
@@ -337,8 +291,7 @@ namespace PRView.UserControls
                     Grid.SetColumn(_border, i);
                     Grid.SetRow(_TextBox, j);
                     Grid.SetColumn(_TextBox, i);
-                    chart_Line.ViewGridBlock.Children.Add(_border);
-                    //chart_Line.ViewGridBlock.Children.Add(_TextBox);
+                    chart_Line.ViewGridBlock.Children.Add(_border);                    
                 }
             }
         }
@@ -372,6 +325,34 @@ namespace PRView.UserControls
         private static void TextBlock()
         {
 
+        }
+        private static PropertyChangedCallback UpdataView()
+        {
+            return (o, args) =>
+            {
+                var _chartLine = o as Chart_Line;
+                if (_chartLine == null) return;
+                _chartLine.ScaleView();
+                //if (wpfAxis.Model != null)
+                //    wpfAxis.Model.Chart.Updater.Run(animate, updateNow);
+            };
+        }
+        private static void UpdataView(Chart_Line chart_Line)
+        {
+            //ScaleView();
+        }
+        private void ScaleView()
+        {
+            //if (!(AxisX_MaxValue > AxisX_MinValue)) return;
+        }
+
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!IsViewVisible) return;
+            var _View = sender as Grid;
+            _Width = _View.ActualWidth;
+            _Height = _View.ActualHeight;
+            
         }
     }
 }
