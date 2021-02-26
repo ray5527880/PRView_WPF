@@ -21,7 +21,7 @@
                               NumberOfGridY="{Binding NumberOfGridY, Mode=OneWay}"
                               IsViewVisible="{Binding Chart1_Enable}"   
                               ChartDatas="{Binding Chart_Line_Data_1}"
-                              testInt="{Binding testInt}"
+                              
                               MaxValueX="{Binding MaxValueX}"
                               AxisX_MaxValue="{Binding AxisXMaxValue, Mode=OneWay}"
                               AxisY_MaxValue="{Binding AxisYMaxValue_1, Mode=OneWay}"

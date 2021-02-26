@@ -59,7 +59,7 @@ namespace PRView.ViewModel
                 {
                     var _datas = new double[6]
                     {
-                    i,/*(Math.Sin(Math.PI * i / 180) * 50 + 100)*/100,i+250,200,300,400
+                    i,(Math.Sin(Math.PI * i / 180) * 50 + 100),i+50,200,300,400
                     };
                     _data.Add(_datas);
                 }

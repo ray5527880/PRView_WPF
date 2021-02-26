@@ -20,7 +20,7 @@ namespace PRView.UserControls
     {
         private double _Width;
         private double _Height;
-
+        private double _ChartTimeMax;
 
 
         public double AxisY_MaxValue
@@ -30,8 +30,7 @@ namespace PRView.UserControls
         }
         public static readonly DependencyProperty AxisY_MaxValueProperty = DependencyProperty.Register(
             nameof(AxisY_MaxValue), typeof(double), typeof(Chart_Line),
-            new PropertyMetadata(default(double),UpdataView()));
-        //new PropertyMetadata(default(double), OnAxisY_MaxValueChanged, CoerceAxisY_MaxValueValue));
+            new PropertyMetadata(default(double), UpdataView()));
         private static void OnAxisY_MaxValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _View = d as Chart_Line;
@@ -48,16 +47,8 @@ namespace PRView.UserControls
         }
         public static readonly DependencyProperty AxisY_MinValueProperty = DependencyProperty.Register(
             nameof(AxisY_MinValue), typeof(double), typeof(Chart_Line),
-            new PropertyMetadata(default(double), OnAxisY_MinValueChanged, CoerceAxisY_MinValueValue));
-        private static void OnAxisY_MinValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _View = d as Chart_Line;
-            UpdataView(_View);
-        }
-        private static object CoerceAxisY_MinValueValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
+            new PropertyMetadata(default(double), UpdataView()));
+
 
         public double AxisX_MaxValue
         {
@@ -66,16 +57,8 @@ namespace PRView.UserControls
         }
         public static readonly DependencyProperty AxisX_MaxValueProperty = DependencyProperty.Register(
             nameof(AxisX_MaxValue), typeof(double), typeof(Chart_Line),
-            new PropertyMetadata(default(double), OnAxisX_MaxValueChanged, CoerceAxisX_MaxValueValue));
-        private static void OnAxisX_MaxValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _View = d as Chart_Line;
-            UpdataView(_View);
-        }
-        private static object CoerceAxisX_MaxValueValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
+            new PropertyMetadata(default(double), UpdataView()));
+
         public double AxisX_MinValue
         {
             get => (double)GetValue(AxisX_MinValueProperty);
@@ -83,25 +66,13 @@ namespace PRView.UserControls
         }
         public static readonly DependencyProperty AxisX_MinValueProperty = DependencyProperty.Register(
             nameof(AxisX_MinValue), typeof(double), typeof(Chart_Line),
-            new PropertyMetadata(default(double), OnAxisX_MinValueChanged, CoerceAxisX_MinValueValue));
-        private static void OnAxisX_MinValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var _View = d as Chart_Line;
-            UpdataView(_View);
-        }
-        private static object CoerceAxisX_MinValueValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
-       
-        
+            new PropertyMetadata(default(double), UpdataView()));
+
+
+
         private double Scale_X = 1;
         private double Scale_Y = 1;
 
-        public int testInt { get; set; }
-        public static readonly DependencyProperty testIntProperty = DependencyProperty.Register(
-            nameof(testInt), typeof(int), typeof(Chart_Line),
-            new PropertyMetadata(default(int), OntestIntChanged, CoercetestIntValue));
         private static void OntestIntChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as Chart_Line;
@@ -132,10 +103,6 @@ namespace PRView.UserControls
         {
             return baseValue;
         }
-        #endregion
-
-        #region 
-        public double ChartMaxValue { get; set; }
         #endregion
 
         #region NumberOfGridX
@@ -291,7 +258,7 @@ namespace PRView.UserControls
                     Grid.SetColumn(_border, i);
                     Grid.SetRow(_TextBox, j);
                     Grid.SetColumn(_TextBox, i);
-                    chart_Line.ViewGridBlock.Children.Add(_border);                    
+                    chart_Line.ViewGridBlock.Children.Add(_border);
                 }
             }
         }
@@ -302,7 +269,7 @@ namespace PRView.UserControls
         {
             chart_Lines.MainChartGrid.Children.Clear();
             var _data = new string[_ChartDatas[0].Length - 1];
-
+            chart_Lines._ChartTimeMax = _ChartDatas[_ChartDatas.Count - 1][0];
             for (int i = 0; i < _ChartDatas.Count; i++)
             {
                 for (int j = 0; j < _ChartDatas[i].Length - 1; j++)
@@ -332,7 +299,11 @@ namespace PRView.UserControls
             {
                 var _chartLine = o as Chart_Line;
                 if (_chartLine == null) return;
+                if (!(_chartLine.AxisX_MaxValue > _chartLine.AxisX_MinValue)) return;
+                if (!(_chartLine.AxisY_MaxValue > _chartLine.AxisY_MinValue)) return;
+                if (_chartLine.AxisX_MinValue < 0) return;
                 _chartLine.ScaleView();
+                _chartLine.SetChartLocation();
                 //if (wpfAxis.Model != null)
                 //    wpfAxis.Model.Chart.Updater.Run(animate, updateNow);
             };
@@ -343,7 +314,23 @@ namespace PRView.UserControls
         }
         private void ScaleView()
         {
-            //if (!(AxisX_MaxValue > AxisX_MinValue)) return;
+            var chartWidth = _Width - 70;
+            var chartHieght = _Height - 80;
+            var viewRangeX = AxisX_MaxValue - AxisX_MinValue;
+            var viewRangeY = AxisY_MaxValue - AxisY_MinValue;
+            GridScale.ScaleX = chartWidth / viewRangeX;
+            GridScale.ScaleY = chartHieght / viewRangeY;
+        }
+        private void SetChartLocation()
+        {
+            var chartWidth = _Width - 70;
+            var chartHieght = _Height - 80;
+            var viewRangeX = AxisX_MaxValue - AxisX_MinValue;
+            var viewRangeY = AxisY_MaxValue - AxisY_MinValue;
+
+            var leftValue = chartWidth / viewRangeX * AxisX_MinValue + 70;
+            var topValue = chartHieght / viewRangeY;
+            MainChartGrid.Margin = new Thickness(leftValue, topValue, MainChartGrid.Margin.Right, MainChartGrid.Margin.Bottom);
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -352,7 +339,7 @@ namespace PRView.UserControls
             var _View = sender as Grid;
             _Width = _View.ActualWidth;
             _Height = _View.ActualHeight;
-            
+
         }
     }
 }

@@ -49,15 +49,6 @@ namespace PRView.UserControls
         public static readonly DependencyProperty AxisXMinValueProperty = DependencyProperty.Register(
            nameof(AxisXMinValue), typeof(double), typeof(MainChart), new PropertyMetadata());
        
-
-        public int testInt { get; set; }
-        public static readonly DependencyProperty testIntProperty = DependencyProperty.Register(
-            nameof(testInt), typeof(int), typeof(MainChart), new PropertyMetadata());
-
-        private double scale_X { get; set; }
-
-        private double scale_Y { get; set; }
-
         #region Chart1_Enable
         public bool Chart1_Enable
         {
@@ -256,11 +247,15 @@ namespace PRView.UserControls
             if (e.Delta > 0)
             {
                 this.AxisYMaxValue_1 += 10;
-                
+                this.AxisYMinValue_1 += 10;
+                this.AxisXMaxValue = 5000;
+
             }
             else if (e.Delta < 0)
             {
+                this.AxisYMaxValue_1 -= 10;
                 this.AxisYMinValue_1 -= 10;
+                this.AxisXMinValue = 1000;
                 
             }
         }
