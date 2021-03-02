@@ -97,7 +97,7 @@ namespace PRView.ViewModel
         public string TriggerTime { set { _TriggerTime = "觸發時間：" + value; } get { return _TriggerTime; } }
         #endregion
 
-        public double ScrollBarValue { get; set; }
+        //public double ScrollBarValue { get; set; }
 
         #region ButtonBlock
 

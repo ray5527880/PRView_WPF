@@ -48,7 +48,7 @@ namespace PRView.UserControls
         }
         public static readonly DependencyProperty AxisXMinValueProperty = DependencyProperty.Register(
            nameof(AxisXMinValue), typeof(double), typeof(MainChart), new PropertyMetadata());
-       
+
         #region Chart1_Enable
         public bool Chart1_Enable
         {
@@ -61,7 +61,8 @@ namespace PRView.UserControls
         private static void OnChart1_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_1.Height = _data.Chart1_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel); 
+            _data.Canvas_1.Height = _data.Chart1_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
+            _data.IsScrollBarView = Visibility.Visible;
         }
         private static object CoerceChart1_EnableValue(DependencyObject d, object baseValue)
         {
@@ -162,7 +163,7 @@ namespace PRView.UserControls
 
         #endregion
 
-       
+
 
         #region NumberOfGridX
         public int NumberOfGridX
@@ -202,30 +203,42 @@ namespace PRView.UserControls
         }
         #endregion
 
-        
-        
-        public double ScrollBarValue
-        {
-            get => (double)GetValue(ScrollBarValueProperty);
-            set => SetValue(ScrollBarValueProperty, value);
-        }
-        public static readonly DependencyProperty ScrollBarValueProperty = DependencyProperty.Register(
-        nameof(ScrollBarValue), typeof(double), typeof(MainChart),
-        new PropertyMetadata(default(double), OnScrollBarValueChanged, CoerceScrollBarValueValue));
-        private static void OnScrollBarValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
+        #region
+        public Visibility IsScrollBarView { get; set; }
 
-        }
-        private static object CoerceScrollBarValueValue(DependencyObject d, object baseValue)
-        {
-            return baseValue;
-        }
+        public double ViewportSizeValue { get; set; }
+
+        public double ScrollBarMinValue { get; set; }
+        public double ScrollBarMaxValue { get; set; }
+        public double ScrollBarValue { get; set; }
+
+        #endregion
+
+        //public double ScrollBarValue
+        //{
+        //    get => (double)GetValue(ScrollBarValueProperty);
+        //    set => SetValue(ScrollBarValueProperty, value);
+        //}
+        //public static readonly DependencyProperty ScrollBarValueProperty = DependencyProperty.Register(
+        //nameof(ScrollBarValue), typeof(double), typeof(MainChart),
+        //new PropertyMetadata(default(double), OnScrollBarValueChanged, CoerceScrollBarValueValue));
+        //private static void OnScrollBarValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //{
+
+        //}
+        //private static object CoerceScrollBarValueValue(DependencyObject d, object baseValue)
+        //{
+        //    return baseValue;
+        //}
         public MainChart()
         {
             InitializeComponent();
+            this.IsScrollBarView = Visibility.Visible;
+
+            //ViewportSizeValue = 1;
         }
 
-        public double MaxValueX 
+        public double MaxValueX
         {
             get => (double)GetValue(MaxValueXProperty);
             set => SetValue(MaxValueXProperty, value);
@@ -256,8 +269,23 @@ namespace PRView.UserControls
                 this.AxisYMaxValue_1 -= 10;
                 this.AxisYMinValue_1 -= 10;
                 this.AxisXMinValue = 1000;
-                
+
             }
         }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {            
+           this. ScrollBarMaxValue = 100;
+            this.ScrollBarMinValue = 0;
+            this.ScrollBarValue = 50;
+
+        }
+
+        private void ScrollBar_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+            MessageBox.Show( e.NewValue.ToString());
+            
+        }
+        
     }
 }
