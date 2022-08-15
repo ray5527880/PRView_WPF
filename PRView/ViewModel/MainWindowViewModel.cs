@@ -12,7 +12,7 @@ namespace PRView.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private MainWindowData _MainWindowData;
-
+        private MainWindowModel _mainWindowMode;
         private string _Location = "Location：";
         private string _Device = "Device：";
         private string _StartData = "開始日期：";
@@ -53,18 +53,6 @@ namespace PRView.ViewModel
             NumberOfGridY = 10;
             ViewMaxValueX = 10;
             ViewMinValueX = -10;
-            Task.Run(() =>
-            {
-                for (int i = 0; i < 19200; i++)
-                {
-                    var _datas = new double[6]
-                    {
-                    i,(Math.Sin(Math.PI * i / 180) * 50 + 100),i+50,200,300,400
-                    };
-                    _data.Add(_datas);
-                }
-                datas = _data;
-            });
         }
         private void test_messagebox2()
         {
@@ -83,8 +71,12 @@ namespace PRView.ViewModel
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "DR-files(*.zip;*.cfg)|*.zip;*.cfg";
             if (openFileDialog.ShowDialog() == true)
-                System.Windows.MessageBox.Show(openFileDialog.SafeFileName);
-
+            {
+                // System.Windows.MessageBox.Show(openFileDialog.SafeFileName);
+                //System.Windows.MessageBox.Show(openFileDialog.FileName);
+                _mainWindowMode = new MainWindowModel();
+                _mainWindowMode.OpenFile(openFileDialog.FileName, openFileDialog.SafeFileName);
+            }
             //txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
         }
 

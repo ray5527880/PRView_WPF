@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScottPlot;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -82,7 +83,7 @@ namespace PRView.UserControls
         private static void OnChart2_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_2.Height = _data.Chart2_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
+           // _data.Canvas_2.Height = _data.Chart2_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
         private static object CoerceChart2_EnableValue(DependencyObject d, object baseValue)
         {
@@ -102,7 +103,7 @@ namespace PRView.UserControls
         private static void OnChart3_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_3.Height = _data.Chart3_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
+            //_data.Canvas_3.Height = _data.Chart3_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
         private static object CoerceChart3_EnableValue(DependencyObject d, object baseValue)
         {
@@ -122,7 +123,7 @@ namespace PRView.UserControls
         private static void OnChart4_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_4.Height = _data.Chart4_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
+            //_data.Canvas_4.Height = _data.Chart4_Enable ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Pixel);
         }
         private static object CoerceChart4_EnableValue(DependencyObject d, object baseValue)
         {
@@ -142,7 +143,7 @@ namespace PRView.UserControls
         private static void OnChart5_EnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _data = d as MainChart;
-            _data.Canvas_5.Height = _data.Chart5_Enable ? new GridLength(120, GridUnitType.Pixel) : new GridLength(0, GridUnitType.Pixel);
+            //_data.Canvas_5.Height = _data.Chart5_Enable ? new GridLength(120, GridUnitType.Pixel) : new GridLength(0, GridUnitType.Pixel);
         }
         private static object CoerceChart5_EnableValue(DependencyObject d, object baseValue)
         {
@@ -234,7 +235,15 @@ namespace PRView.UserControls
         {
             InitializeComponent();
             this.IsScrollBarView = Visibility.Visible;
-
+            double[] dataX = new double[] { 1, 2, 3, 4, 5 };
+            double[] dataY = new double[] { 1, 4, 9, 16, 25 };
+           // WpfPlot1.Plot.AddScatter(dataX, dataY);
+           var x = DataGen.RandomWalk(1_00_00);
+            WpfPlot1.Plot.AddSignalXY(dataX, dataY);
+            WpfPlot1.Plot.RemoveAt(0);
+            //WpfPlot1.Plot.
+                 //WpfPlot1.Plot.AddSignal(dataX);
+            WpfPlot1.Refresh();
             //ViewportSizeValue = 1;
         }
 
@@ -257,7 +266,7 @@ namespace PRView.UserControls
 
         private void Border_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (e.Delta > 0)
+           /* if (e.Delta > 0)
             {
                 this.AxisYMaxValue_1 += 10;
                 this.AxisYMinValue_1 += 10;
@@ -270,7 +279,7 @@ namespace PRView.UserControls
                 this.AxisYMinValue_1 -= 10;
                 this.AxisXMinValue = 1000;
 
-            }
+            }*/
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -283,7 +292,7 @@ namespace PRView.UserControls
 
         private void ScrollBar_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
-            MessageBox.Show( e.NewValue.ToString());
+           // MessageBox.Show( e.NewValue.ToString());
             
         }
         

@@ -28,7 +28,7 @@ namespace PRView.Model
             string strRarPath = string.Empty;
             string strFileName = FileName;
             string strXmlFile = this.GetType().Assembly.Location;
-            string strfilePath = strXmlFile = strXmlFile.Replace("PRView.exe", "CompressFile\\");
+            string strfilePath = strXmlFile = strXmlFile.Replace("PRView.dll", "CompressFile\\");
             if (strFile.IndexOf(".cfg") > 0 || strFile.IndexOf(".CFG") > 0)
             {
                 if (File.Exists(strFile.Replace(".cfg", ".dat")) || File.Exists(strFile.Replace(".CFG", ".DAT")))
@@ -93,7 +93,7 @@ namespace PRView.Model
             }
             catch (ApplicationException message)
             {
-               
+                throw;
             }
             return _MainWindowData;
         }

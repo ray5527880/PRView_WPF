@@ -8,16 +8,20 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainChart}}}" Loaded="Grid_Loaded" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="0" x:Name="Canvas_1" />
-            <RowDefinition Height="0" x:Name="Canvas_2"/>
+            <RowDefinition  x:Name="Canvas_1" />
+            <!--RowDefinition Height="0" x:Name="Canvas_2"/>
             <RowDefinition Height="0" x:Name="Canvas_3"/>
             <RowDefinition Height="0" x:Name="Canvas_4"/>
             <RowDefinition Height="0" x:Name="Canvas_5"/>
-            <RowDefinition Height="20" x:Name="SBar"/>
+            <RowDefinition Height="20" x:Name="SBar"/-->
         </Grid.RowDefinitions>
-        <Border Grid.Row="0"  MouseWheel="Border_MouseWheel">
-
-            <local:Chart_Line NumberOfGridX="{Binding NumberOfGridX, Mode=OneWay}"
+        <WpfPlot Name="WpfPlot1"  />
+        <!--Border Grid.Row="0"  MouseWheel="Border_MouseWheel">
+            
+          
+            <local:Chart_Line 
+                                
+                               NumberOfGridX="{Binding NumberOfGridX, Mode=OneWay}"
                               NumberOfGridY="{Binding NumberOfGridY, Mode=OneWay}"
                               IsViewVisible="{Binding Chart1_Enable}"   
                               ChartDatas="{Binding Chart_Line_Data_1}"
@@ -28,15 +32,15 @@
                               AxisX_MinValue="{Binding AxisXMinValue,Mode=OneWay}"
                               AxisY_MinValue="{Binding AxisYMinValue_1,Mode=OneWay}"
                               >
-                
+
             </local:Chart_Line>
         </Border>
-        <Border Grid.Row="1"  >
+        < Grid.Row="1"  >
             <local:Chart_Line NumberOfGridX="{Binding NumberOfGridX, Mode=OneWay}"
                               NumberOfGridY="{Binding NumberOfGridY, Mode=OneWay}"
                               IsViewVisible="{Binding Chart1_Enable}"                             
                               />
-        </Border>
+        </>
         <Border Grid.Row="2" >
             
         </Border>
@@ -45,9 +49,9 @@
         </Border>
         <Border Grid.Row="4" >
 
-        </Border>
-        
-        <ScrollBar Minimum="0" Maximum="100"  Grid.Row="5" Orientation="Horizontal" Scroll="ScrollBar_Scroll"  Margin="0,1,0,2"  ViewportSize="5" />
-        
+        </Border-->
+
+        <!--ScrollBar Minimum="0" Maximum="100"  Grid.Row="5" Orientation="Horizontal" Scroll="ScrollBar_Scroll"  Margin="0,1,0,2"  ViewportSize="5" /-->
+
     </Grid>
 </UserControl>
